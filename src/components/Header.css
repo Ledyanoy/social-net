@@ -1,0 +1,9 @@
+.page-header {
+    grid-area: header;
+    background-color: aquamarine;
+}
+
+.page-header__image {
+    width: auto;
+    max-height: 60px;
+}

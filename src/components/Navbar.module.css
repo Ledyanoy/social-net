@@ -1,0 +1,9 @@
+.navbar {
+    grid-area: navbar;
+    background-color: aqua;
+    margin: 0;
+}
+
+.item {
+    color: yellow;
+}

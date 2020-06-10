@@ -1,0 +1,9 @@
+.content {
+    grid-area: content;
+    background-color: wheat;
+}
+
+.content img {
+    max-width: 100%;
+    height: auto;
+}
