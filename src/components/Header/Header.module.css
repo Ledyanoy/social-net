@@ -1,9 +1,9 @@
-.page-header {
+.header {
     grid-area: header;
     background-color: aquamarine;
 }
 
-.page-header__image {
+.header img {
     width: auto;
     max-height: 60px;
 }
