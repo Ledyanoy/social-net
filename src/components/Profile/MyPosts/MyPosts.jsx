@@ -8,11 +8,9 @@ const MyPosts = () => {
             My Posts
             <input type="text"/>
             <ul>
+                <Post message={`Hi, world!`} likes={2}/>
+                <Post message={`Bruh`} likes={1000}/>
                 <Post />
-                <Post />
-                <Post />
-
-
             </ul>
         </div>
     )
