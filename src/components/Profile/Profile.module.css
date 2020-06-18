@@ -3,7 +3,14 @@
     background-color: wheat;
 }
 
-.content img {
+.contentImg {
     max-width: 100%;
     height: auto;
+}
+
+.profileImg {
+    max-width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
 }
