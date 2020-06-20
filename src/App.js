@@ -8,7 +8,9 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 
 
-const App = () => {
+const App = ({postsData}) => {
+    const wrappedProfile = () => <Profile postsData={postsData}/>;
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -16,7 +18,7 @@ const App = () => {
                 <Navbar/>
                 <div className='app-wrapper__content'>
                     <Route path='/dialogs' component={Dialogs}/>
-                    <Route path='/profile' component={Profile}/>
+                    <Route path='/profile' component={wrappedProfile}/>
                 </div>
             </div>
         </BrowserRouter>

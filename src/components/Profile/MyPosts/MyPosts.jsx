@@ -2,15 +2,9 @@ import React from 'react';
 import Post from './Post/Post'
 import {postList} from './MyPosts.module.css'
 
-const MyPosts = () => {
+const MyPosts = ({postsData}) => {
 
-    const postData = [
-        {id: 1, message: `Hi, world!`, likesCount: 2},
-        {id: 2, message: 'Bruh', likesCount: 1000},
-        {id: 3, message: 'Falling in Reverse are cool!', likesCount: -100},
-    ];
-
-    const Posts = postData.map(({message, likesCount}) => <Post message={message} likesCount={likesCount}/>)
+    const Posts = postsData.map(({message, likesCount}) => <Post message={message} likesCount={likesCount}/>)
 
     return (
         <div>
