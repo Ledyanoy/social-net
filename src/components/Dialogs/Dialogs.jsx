@@ -2,37 +2,53 @@ import React from 'react';
 import {dialogs, dialogList, dialog, messages, message, active} from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 
+const DilalogItem = ({name, id}) => {
+    return (
+        <li className={dialog}>
+            <NavLink to={`/dialogs/${id}`} activeClassName={active}>{name}</NavLink>
+        </li>
+    )
+}
+
+const Message = ({text}) => {
+    return (
+        <li className={message}>
+            {text}
+        </li>
+    )
+}
+
 
 const Dialogs = () => {
+    const dialogsData = [
+        {id: 1, name: 'Artemiy'},
+        {id: 2, name: 'Arina'},
+        {id: 3, name: 'Kseniya'},
+        {id: 4, name: 'Babushka'},
+        {id: 5, name: 'Ded'},
+        {id: 13, name: 'Cat'},
+        {id: 7, name: 'Mishka'},
+    ];
+
+    const messageData = [
+        {id: 1, message: 'hello my friend'},
+        {id: 2, message: 'Bruh'},
+        {id: 3, message: 'What are you doing?'},
+        {id: 5, message: 'You betreing my head, again...'},
+    ];
+
+    const DialogsElements = dialogsData.map(({id, name}) => <DilalogItem name={name} id={id}/>);
+
+    const MessagesElements = messageData.map(({message}) =>  <Message text={message}/>);
+
+
     return (
         <div className={dialogs}>
             <ul className={dialogList}>
-                <li className={dialog}>
-                    <NavLink to='/dialogs/1'>Artemiy</NavLink>
-                </li>
-                <li className={`${dialog} ${active}`}>
-                    <NavLink to='/dialogs/2'>Arina</NavLink>
-                </li>
-                <li className={dialog}>
-                    <NavLink to='/dialogs/3'>Kseniya</NavLink>
-                </li>
-                <li className={dialog}>
-                    Dog
-                </li>
-                <li className={dialog}>
-                    Cat
-                </li>
+                {DialogsElements}
             </ul>
             <ul className={messages}>
-                <li className={message}>
-                    hi
-                </li>
-                <li className={message}>
-                    How are you
-                </li>
-                <li className={message}>
-                    Buy!
-                </li>
+                {MessagesElements}
             </ul>
         </div>
 

@@ -1,13 +1,10 @@
-.content {
-    padding: 20px;
-}
 
-.contentImg {
+.backPic {
     max-width: 100%;
     height: auto;
 }
 
-.profileImg {
+.avatar {
     max-width: 200px;
     height: 200px;
     object-fit: cover;

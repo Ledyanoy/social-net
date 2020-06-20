@@ -11,12 +11,12 @@
     background-color: white;
 }
 
-.dialog {
+.dialog a {
     text-decoration: none;
 
 }
 
-.dialog.active{
+.active{
     color: red;
 }
 
