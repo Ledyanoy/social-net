@@ -1,6 +1,6 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 7fr;
     grid-gap: 20px;
     padding: 20px;
 }
@@ -9,22 +9,61 @@
     list-style: none;
     padding: 20px;
     background-color: white;
+    border-radius: 5px;
 }
 
-.dialog a {
-    text-decoration: none;
-
+.dialog:not(:last-child) {
+    margin-bottom: 10px;
 }
 
 .active{
-    color: red;
+    color: #ff0000;
+}
+
+.active .avatar{
+    border: 2px solid red;
 }
 
 .messages {
     padding: 20px;
     list-style: none;
     background-color: white;
+    border-radius: 5px;
 }
 
 .message {
+    font-size: 20px;
+    line-height: 32px;
+    background-color: wheat;
+    width: 80%;
+    margin-right: auto;
+    border-radius: 5px;
+    padding: 0 20px;
+}
+
+.message:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.me {
+    background-color: aqua;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.avatar {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.link {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    font-size: 20px;
+    align-items: center;
+    justify-items: start;
+    text-decoration: none;
 }

@@ -1,11 +1,11 @@
 import React from 'react';
-import {message} from './../Dialogs.module.css';
+import {message , me} from './../Dialogs.module.css';
 
 
-const Message = ({text}) => {
+const Message = ({state}) => {
     return (
-        <li className={message}>
-            {text}
+        <li className={`${message} ${state.me ? me : ''}`}>
+            {state.message}
         </li>
     )
 }

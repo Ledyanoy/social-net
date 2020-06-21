@@ -3,23 +3,5 @@
     background-color: aqua;
     margin: 0;
     padding: 20px;
-    padding-left: 40px;
 }
 
-.item {
-    color: white;
-}
-
-.link {
-    color: white;
-    text-decoration: none;
-}
-
-.link:hover {
-    color: blue;
-}
-
-.link.activeLink {
-    color: grey;
-    font-weight: bold;
-}
