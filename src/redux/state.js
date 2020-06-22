@@ -1,3 +1,5 @@
+import reRenderer from "../Renderer";
+
 const state = {
     navBar: {
         menu: [
@@ -5,6 +7,11 @@ const state = {
             {link: '/dialogs', name: 'Dialogs'},
             {link: '/news', name: 'News'},
             {link: '/bookmarks', name: 'Bookmarks'},
+        ],
+        friends: [
+            {id: 1, name: 'Misha', img: 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'},
+            {id: 2, name: 'Yan', img: 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'},
+            {id: 3, name: 'Artem', img: 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'},
         ],
     },
     profilePage: {
@@ -25,17 +32,17 @@ const state = {
             {
                 id: 2,
                 name: 'Arina',
-                img: 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png'
+                img: 'https://cdn5.vectorstock.com/i/thumb-large/61/44/avatar-business-woman-graphic-vector-9646144.jpg'
             },
             {
                 id: 3,
                 name: 'Kseniya',
-                img: 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png'
+                img: 'https://cdn5.vectorstock.com/i/thumb-large/61/44/avatar-business-woman-graphic-vector-9646144.jpg'
             },
             {
                 id: 4,
                 name: 'Babushka',
-                img: 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png'
+                img: 'https://cdn5.vectorstock.com/i/thumb-large/61/44/avatar-business-woman-graphic-vector-9646144.jpgg'
             },
             {
                 id: 5,
@@ -55,4 +62,14 @@ const state = {
         ],
     },
 }
+
+export const stateAddPost = (post) => {
+
+    const newPost = {
+        id: 5, message: post, likesCount: 0
+    };
+    state.profilePage.postsData.push(newPost);
+    reRenderer(state, stateAddPost);
+}
+
 export default state;

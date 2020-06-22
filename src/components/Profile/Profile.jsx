@@ -4,11 +4,11 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
-const Profile = ({state}) => {
+const Profile = ({state, stateAddPost}) => {
     return (
         <div className={content}>
             <ProfileInfo/>
-            <MyPosts postsData={state.postsData}/>
+            <MyPosts postsData={state.postsData} stateAddPost={stateAddPost}/>
         </div>
 
     )

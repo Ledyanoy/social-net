@@ -1,5 +1,5 @@
 import React from 'react';
-import {dialogs, dialogList, messages} from './Dialogs.module.css';
+import {dialogs, dialogList, messages, actions} from './Dialogs.module.css';
 import DialogItem from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
@@ -7,8 +7,13 @@ import Message from "./Message/Message";
 const Dialogs = ({state}) => {
 
     const DialogsElements = state.dialogsData.map((dialog) => <DialogItem state={dialog}/>);
-
     const MessagesElements = state.messageData.map((message) => <Message state={message}/>);
+
+    const newReplic = React.createRef();
+    const addReplic =()=> {
+        const text = newReplic.current.value;
+        console.log(text);
+    }
 
 
     return (
@@ -19,6 +24,10 @@ const Dialogs = ({state}) => {
             <ul className={messages}>
                 {MessagesElements}
             </ul>
+            <div className={actions}>
+                <input type="text" ref={newReplic}/>
+                <button onClick={addReplic}>Написать</button>
+            </div>
         </div>
 
     )

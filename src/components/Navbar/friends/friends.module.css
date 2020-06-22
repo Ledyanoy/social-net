@@ -1,0 +1,33 @@
+.list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left:  0;
+    grid-gap: 10px;
+
+}
+
+.item {
+
+}
+
+.link {
+    color: olive;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.avatar {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+.active {
+    color: red;
+}

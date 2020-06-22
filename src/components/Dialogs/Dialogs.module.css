@@ -3,13 +3,18 @@
     grid-template-columns: 3fr 7fr;
     grid-gap: 20px;
     padding: 20px;
+    grid-template-areas:
+            'dialogs messages'
+            '. actions';
 }
 
 .dialogList {
+    grid-area: dialogs;
     list-style: none;
     padding: 20px;
     background-color: white;
     border-radius: 5px;
+    margin: 0;
 }
 
 .dialog:not(:last-child) {
@@ -25,10 +30,12 @@
 }
 
 .messages {
+    grid-area: messages;
     padding: 20px;
     list-style: none;
     background-color: white;
     border-radius: 5px;
+    margin: 0;
 }
 
 .message {
@@ -66,4 +73,11 @@
     align-items: center;
     justify-items: start;
     text-decoration: none;
+}
+
+.actions {
+    grid-area: actions;
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-gap: 20px;
 }
