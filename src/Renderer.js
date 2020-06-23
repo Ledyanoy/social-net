@@ -4,11 +4,14 @@ import App from './App';
 
 import {BrowserRouter} from "react-router-dom";
 
-const reRenderer = (state, stateAddPost) => {
+const reRenderer = (state, stateAddPost, stateChangePostValue) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} stateAddPost={stateAddPost}/>
+                <App state={state}
+                     stateAddPost={stateAddPost}
+                     stateChangePostValue={stateChangePostValue}
+                />
             </BrowserRouter>
         </React.StrictMode>, document.getElementById('root')
     );

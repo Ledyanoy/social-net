@@ -21,6 +21,7 @@ const state = {
             {id: 3, message: 'Falling in Reverse are cool!', likesCount: -100},
             {id: 3, message: 'Limp Bizkit', likesCount: 777},
         ],
+        newPostText: 'it-kamasutra',
     },
     dialogsPage: {
         dialogsData: [
@@ -63,13 +64,19 @@ const state = {
     },
 }
 
-export const stateAddPost = (post) => {
+export const stateAddPost = () => {
 
     const newPost = {
-        id: 5, message: post, likesCount: 0
+        id: 5, message: state.profilePage.newPostText, likesCount: 0
     };
     state.profilePage.postsData.push(newPost);
-    reRenderer(state, stateAddPost);
+    reRenderer(state, stateAddPost, stateChangePostValue);
+    stateChangePostValue('');
 }
 
+export const stateChangePostValue = (value) => {
+
+    state.profilePage.newPostText = value;
+    reRenderer(state, stateAddPost, stateChangePostValue);
+}
 export default state;

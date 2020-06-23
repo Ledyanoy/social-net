@@ -1,9 +1,9 @@
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import state, {stateAddPost} from "./redux/state";
+import state, {stateAddPost, stateChangePostValue} from "./redux/state";
 import reRenderer from "./Renderer";
 
-reRenderer(state, stateAddPost);
+reRenderer(state, stateAddPost, stateChangePostValue);
 
 
 // If you want your app to work offline and load faster, you can change
