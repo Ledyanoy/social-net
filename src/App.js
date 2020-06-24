@@ -8,7 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 
 
-const App = ({state, stateAddPost, stateChangePostValue}) => {
+const App = ({state, dispatch}) => {
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -19,8 +19,7 @@ const App = ({state, stateAddPost, stateChangePostValue}) => {
                 <Route path='/profile' render={() => {
                     return (
                         <Profile state={state.profilePage}
-                                 stateAddPost={stateAddPost}
-                                 stateChangePostValue={stateChangePostValue}
+                                 dispatch={dispatch}
                         /> )
                 }} />
 

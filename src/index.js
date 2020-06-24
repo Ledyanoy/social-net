@@ -12,8 +12,7 @@ const reRenderer = (state) => {
         <React.StrictMode>
             <BrowserRouter>
                 <App state={state}
-                     stateAddPost={store.stateAddPost.bind(store)}
-                     stateChangePostValue={store.stateChangePostValue.bind(store)}
+                     dispatch={store.dispatch.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>, document.getElementById('root')
@@ -22,7 +21,7 @@ const reRenderer = (state) => {
 
 reRenderer(store.getState())
 
-store.subscriber(reRenderer);
+store._callSubscriber(reRenderer);
 
 
 

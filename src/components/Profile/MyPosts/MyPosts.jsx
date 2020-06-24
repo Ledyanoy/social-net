@@ -2,20 +2,20 @@ import React from 'react';
 import Post from './Post/Post'
 import {postList} from './MyPosts.module.css'
 
-const MyPosts = ({postsData, stateAddPost, newPostText, stateChangePostValue}) => {
+const MyPosts = ({postsData, newPostText, dispatch}) => {
 
     const Posts = postsData.map(({message, likesCount}) => <Post message={message} likesCount={likesCount}/>)
 
     const newPost = React.createRef();
 
     const addPost = () => {
-        const text = newPost.current.value;
-        stateAddPost(text);
+        dispatch({type: 'ADD-POST'})
     }
 
     const onPostInputChange =() => {
         const text = newPost.current.value;
-        stateChangePostValue(text);
+        const action = {type: 'CHANGE-POST-VALUE', value: text};
+        dispatch(action);
     }
 
     return (

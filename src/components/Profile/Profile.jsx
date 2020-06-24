@@ -4,14 +4,13 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
-const Profile = ({state, stateAddPost, stateChangePostValue}) => {
+const Profile = ({state, dispatch}) => {
     return (
         <div className={content}>
             <ProfileInfo/>
             <MyPosts postsData={state.postsData}
                      newPostText={state.newPostText}
-                     stateAddPost={stateAddPost}
-                     stateChangePostValue={stateChangePostValue}
+                     dispatch={dispatch}
             />
         </div>
 
