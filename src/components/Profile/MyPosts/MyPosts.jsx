@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './Post/Post'
 import {postList} from './MyPosts.module.css'
+import {addPostActionCreator, changePostValueActionCreator} from "../../../redux/state";
 
 const MyPosts = ({postsData, newPostText, dispatch}) => {
 
@@ -9,13 +10,12 @@ const MyPosts = ({postsData, newPostText, dispatch}) => {
     const newPost = React.createRef();
 
     const addPost = () => {
-        dispatch({type: 'ADD-POST'})
+        dispatch(addPostActionCreator());
     }
 
     const onPostInputChange =() => {
         const text = newPost.current.value;
-        const action = {type: 'CHANGE-POST-VALUE', value: text};
-        dispatch(action);
+        dispatch(changePostValueActionCreator(text));
     }
 
     return (
