@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const CHANGE_POST_VALUE = 'CHANGE-POST-VALUE';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const CHANGE_MESSAGE_VALUE = 'CHANGE-MESSAGE-VALUE';
+import dialogReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import navbarReducer from "./navbar-reucer";
 
 
 const store = {
@@ -66,7 +65,7 @@ const store = {
                 {id: 5, message: 'You betrying my head, again...', me: true},
                 {id: 6, message: 'Khe Khe ;)'},
             ],
-            newMessageText: 'Bruh',
+            newMessageText: '',
         },
     },
 
@@ -77,57 +76,17 @@ const store = {
     re() {
         console.log('no observer subscribed')
     },
+
     getState() {
         return this._state;
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0,
-            };
-            this._state.profilePage.postsData.push(newPost);
-            this.re(this._state);
-            this._state.profilePage.newPostText = '';
-        } else if (action.type === CHANGE_POST_VALUE) {
-            this._state.profilePage.newPostText = action.value;
-            this.re(this._state);
-        } else if (action.type === ADD_MESSAGE) {
-            const newMessage = {
-                id: 2,
-                message: this._state.dialogsPage.newMessageText,
-                me: true
-            };
-            this._state.dialogsPage.messageData.push(newMessage);
-            this.re(this._state);
-            this._state.dialogsPage.newMessageText = '';
-        } else if(action.type === CHANGE_MESSAGE_VALUE) {
-            this._state.dialogsPage.newMessageText = action.value;
-            this.re(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action);
+        this._state.navBar = navbarReducer(this._state.navBar, action);
+        this.re(this._state);
     },
-}
-
-export const changePostValueActionCreator = (value) => {
-    const action = {type: CHANGE_POST_VALUE, value: value};
-    return action;
-}
-
-export const addPostActionCreator = () => {
-    const action = {type: ADD_POST};
-    return action;
-}
-
-export const changeMessageValueActionCreator = (value) => {
-    const action = {type: CHANGE_MESSAGE_VALUE, value: value};
-    return action;
-}
-
-export const addMessageActionCreator = () => {
-    const action = {type: ADD_MESSAGE};
-    return action;
 }
 
 export default store;
