@@ -19,7 +19,6 @@ const App = ({state, dispatch}) => {
                            return (
                                <Dialogs state={state.dialogsPage}
                                         dispatch={dispatch}
-                                        newMessageText={state.dialogsPage.newMessageText}
                                />)
                        }}/>
                 <Route path='/profile' render={() => {
