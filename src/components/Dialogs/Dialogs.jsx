@@ -5,21 +5,20 @@ import Message from "./Message/Message";
 import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogs-reducer";
 
 
-const Dialogs = ({state, dispatch}) => {
+const Dialogs = ({state, addReplic, messageChange}) => {
 
     const DialogsElements = state.dialogsData.map((dialog) => <DialogItem state={dialog}/>);
     const MessagesElements = state.messageData.map((message) => <Message state={message}/>);
 
 
 
-    const addReplic = () => {
-        dispatch(addMessageActionCreator())
-
+    const onAddReplic = () => {
+        addReplic();
     }
 
-    const messageChange = (e) => {
+    const onMessageChange = (e) => {
         const text = e.target.value;
-        dispatch(changeMessageValueActionCreator(text));
+        messageChange(text);
     }
 
 
@@ -32,8 +31,8 @@ const Dialogs = ({state, dispatch}) => {
                 {MessagesElements}
             </ul>
             <div className={actions}>
-                <input type="text"  value={state.newMessageText} onChange={messageChange}/>
-                <button onClick={addReplic}>Написать</button>
+                <input type="text"  value={state.newMessageText} onChange={onMessageChange}/>
+                <button onClick={onAddReplic}>Написать</button>
             </div>
         </div>
 

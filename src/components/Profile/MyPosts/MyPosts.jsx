@@ -1,21 +1,21 @@
 import React from 'react';
 import Post from './Post/Post'
 import {postList} from './MyPosts.module.css'
-import {addPostActionCreator, changePostValueActionCreator} from "../../../redux/profile-reducer";
 
-const MyPosts = ({postsData, newPostText, dispatch}) => {
+const MyPosts = ({postsData, newPostText, addPost, PostInputChange}) => {
+    console.log(postsData);
 
     const Posts = postsData.map(({message, likesCount}) => <Post message={message} likesCount={likesCount}/>)
 
     const newPost = React.createRef();
 
-    const addPost = () => {
-        dispatch(addPostActionCreator());
+    const onAddPost = () => {
+        addPost();
     }
 
     const onPostInputChange =() => {
         const text = newPost.current.value;
-        dispatch(changePostValueActionCreator(text));
+        PostInputChange(text);
     }
 
     return (
@@ -29,7 +29,7 @@ const MyPosts = ({postsData, newPostText, dispatch}) => {
                 />
             </div>
             <div>
-                <button onClick={addPost}>Добавить</button>
+                <button onClick={onAddPost}>Добавить</button>
             </div>
             <ul className={postList}>
                 {Posts}
