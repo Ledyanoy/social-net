@@ -1,14 +1,14 @@
 import React from 'react';
 import {navbar} from './Navbar.module.css';
-import NavMenu from "./navMenu/navMenu";
-import Friends from "./friends/friends";
+import NavMenuContainer from "./navMenu/menuItem/NavMenuContainer";
+import FriendsContainer from "./friends/FriendsContainer";
 
 
-const Navbar = ({state}) => {
+const Navbar = () => {
     return (
         <div className={navbar}>
-            <NavMenu state={state.menu}/>
-            <Friends state={state.friends}/>
+            <NavMenuContainer />
+            <FriendsContainer />
         </div>
     )
 }

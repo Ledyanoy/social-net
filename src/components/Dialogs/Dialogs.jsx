@@ -2,13 +2,12 @@ import React from 'react';
 import {dialogs, dialogList, messages, actions} from './Dialogs.module.css';
 import DialogItem from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogs-reducer";
 
 
-const Dialogs = ({state, addReplic, messageChange}) => {
+const Dialogs = ({dialogsPage, addReplic, messageChange}) => {
 
-    const DialogsElements = state.dialogsData.map((dialog) => <DialogItem state={dialog}/>);
-    const MessagesElements = state.messageData.map((message) => <Message state={message}/>);
+    const DialogsElements = dialogsPage.dialogsData.map((dialog) => <DialogItem state={dialog}/>);
+    const MessagesElements = dialogsPage.messageData.map((message) => <Message state={message}/>);
 
 
 
@@ -31,7 +30,7 @@ const Dialogs = ({state, addReplic, messageChange}) => {
                 {MessagesElements}
             </ul>
             <div className={actions}>
-                <input type="text"  value={state.newMessageText} onChange={onMessageChange}/>
+                <input type="text"  value={dialogsPage.newMessageText} onChange={onMessageChange}/>
                 <button onClick={onAddReplic}>Написать</button>
             </div>
         </div>

@@ -3,7 +3,6 @@ import Post from './Post/Post'
 import {postList} from './MyPosts.module.css'
 
 const MyPosts = ({postsData, newPostText, addPost, PostInputChange}) => {
-    console.log(postsData);
 
     const Posts = postsData.map(({message, likesCount}) => <Post message={message} likesCount={likesCount}/>)
 
