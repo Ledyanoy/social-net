@@ -3,7 +3,7 @@ import {menu} from './navMenu.module.css';
 import MenuItem from "./menuItem/menuItem";
 
 const NavMenu = ({navigation}) => {
-    const MenuItems = navigation.map((item) => <MenuItem link={item.link} name={item.name}/>);
+    const MenuItems = navigation.map((item) => <MenuItem link={item.link} key={item.id} name={item.name}/>);
     return (
         <ul className={menu}>
             {MenuItems}

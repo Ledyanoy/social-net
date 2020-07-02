@@ -6,8 +6,8 @@ import Message from "./Message/Message";
 
 const Dialogs = ({dialogsPage, addReplic, messageChange}) => {
 
-    const DialogsElements = dialogsPage.dialogsData.map((dialog) => <DialogItem state={dialog}/>);
-    const MessagesElements = dialogsPage.messageData.map((message) => <Message state={message}/>);
+    const DialogsElements = dialogsPage.dialogsData.map((dialog) => <DialogItem key={dialog.id} state={dialog}/>);
+    const MessagesElements = dialogsPage.messageData.map((message) => <Message key={message.id} state={message}/>);
 
 
 

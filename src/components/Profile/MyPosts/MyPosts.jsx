@@ -4,7 +4,7 @@ import {postList} from './MyPosts.module.css'
 
 const MyPosts = ({postsData, newPostText, addPost, PostInputChange}) => {
 
-    const Posts = postsData.map(({message, likesCount}) => <Post message={message} likesCount={likesCount}/>)
+    const Posts = postsData.map(({message, likesCount, id}) => <Post message={message} key={id} likesCount={likesCount}/>)
 
     const newPost = React.createRef();
 
