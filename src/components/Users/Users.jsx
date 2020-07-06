@@ -1,39 +1,14 @@
 import React from 'react';
 import User from "./User";
+import * as axios from "axios";
 
 
 const Users = (props) => {
-
     if (!props.users.length) {
-        props.addUsers([
-            {
-                id: 1,
-                fullName: 'Viktor',
-                status: 'I lake dogs... to eat',
-                location: {city: 'Minsk', country: 'Belarus'},
-                followed: true,
-            },
-            {
-                id: 2,
-                fullName: 'Aniya',
-                status: 'Theres no hope for me anymore',
-                location: {city: 'Minsk', country: 'Belarus'},
-                followed: false,
-            },
-            {
-                id: 3,
-                fullName: 'Joe',
-                status: 'Yeah',
-                location: {city: 'Minsk', country: 'Belarus'},
-                followed: true,
-            },
-            {
-                id: 4,
-                fullName: 'Markus',
-                status: 'What wrong with black people',
-                location: {city: 'Minsk', country: 'Belarus'},
-                followed: true,
-            },])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users/').then(response => {
+            console.log(response.data.items);
+            props.addUsers(response.data.items);
+        })
     }
 
 
