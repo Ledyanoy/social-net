@@ -4,6 +4,8 @@ const initialState = {
             {link: '/dialogs', name: 'Dialogs', id:2},
             {link: '/news', name: 'News', id:3},
             {link: '/bookmarks', name: 'Bookmarks', id:4},
+            {link: '/users', name: 'Users', id:5},
+
         ],
         friends: [
             {id: 1, name: 'Misha', img: 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'},
