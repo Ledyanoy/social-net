@@ -4,14 +4,13 @@ import * as axios from "axios";
 
 
 class Users extends Component {
-    constructor(props) {
-        super(props);
+
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users/').then(response => {
             console.log(response.data.items);
             this.props.addUsers(response.data.items);
         });
     }
-
 
 
     render() {
