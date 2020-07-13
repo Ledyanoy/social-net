@@ -10,7 +10,6 @@ import {
 } from "../../redux/users-reducer";
 import React, {Component} from "react";
 import * as axios from "axios";
-import preloader from '../../assets/images/810.gif';
 import Preloader from "../Common/Preloader/Preloader";
 
 class UsersContainerApi extends Component {
@@ -18,7 +17,6 @@ class UsersContainerApi extends Component {
     componentDidMount() {
         this.props.setIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            console.log(response.data);
             this.props.setIsFetching(false);
             this.props.addUsers(response.data.items);
             this.props.setTotalCount(response.data.totalCount);
@@ -37,17 +35,17 @@ class UsersContainerApi extends Component {
 
     render() {
         return <>
-        {this.props.isFetching ?
-            <Preloader/>
-            : null}
-        <Users totalUsersCount={this.props.totalUsersCount}
-               pageSize={this.props.pageSize}
-               currentPage={this.props.currentPage}
-               unfollow={this.props.unfollow}
-               follow={this.props.follow}
-               changePage={this.changePage}
-               users={this.props.users}
-        />
+            {this.props.isFetching ?
+                <Preloader/>
+                : null}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   unfollow={this.props.unfollow}
+                   follow={this.props.follow}
+                   changePage={this.changePage}
+                   users={this.props.users}
+            />
         </>
     }
 }
@@ -63,6 +61,13 @@ const mapStateToProps = (state) => {
 }
 
 
-const UsersContainer = connect(mapStateToProps, {follow, unfollow, addUsers, changeCurrentPage, setTotalCount, setIsFetching})(UsersContainerApi);
+const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    addUsers,
+    changeCurrentPage,
+    setTotalCount,
+    setIsFetching
+})(UsersContainerApi);
 
 export default UsersContainer;

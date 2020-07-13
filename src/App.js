@@ -8,6 +8,7 @@ import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Users from "./components/Users/Users";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 const App = () => {
@@ -21,8 +22,8 @@ const App = () => {
                            return <DialogsContainer/>
                        }}/>
 
-                <Route path='/profile' render={() => {
-                    return <Profile/>
+                <Route path='/profile/:userId?' render={() => {
+                    return <ProfileContainer/>
                 }}/>
 
                 <Route path='/users' render={() => <UsersContainer/>} />

@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_VALUE = 'CHANGE-POST-VALUE';
+const SET_PROFILE = 'SET_PROFILE';
 
 const initialState = {
     postsData: [
@@ -9,6 +10,7 @@ const initialState = {
         {id: 4, message: 'Limp Bizkit', likesCount: 777},
     ],
     newPostText: 'it-kamasutra',
+    profile: null,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -28,7 +30,11 @@ const profileReducer = (state = initialState, action) => {
                     }],
                 newPostText: '',
             }
-
+        case SET_PROFILE :
+            return {
+                ...state,
+                profile: action.profile,
+            }
         default:
             return state;
     }
@@ -43,5 +49,8 @@ export const addPostActionCreator = () => {
     const action = {type: ADD_POST};
     return action;
 }
+
+export const setProfile = (profile) => ({type: SET_PROFILE, profile });
+
 
 export default profileReducer;
