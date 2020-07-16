@@ -1,9 +1,21 @@
 .header {
     grid-area: header;
     background-color: aquamarine;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header img {
     width: auto;
     max-height: 60px;
+}
+.login {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 1;
+    position: relative;
 }
