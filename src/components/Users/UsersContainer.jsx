@@ -9,25 +9,25 @@ import {
     unfollow
 } from "../../redux/users-reducer";
 import React, {Component} from "react";
-import * as axios from "axios";
 import Preloader from "../Common/Preloader/Preloader";
+import {getUsers, usersApi} from "../api/api";
 
 class UsersContainerApi extends Component {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.setIsFetching(false);
-            this.props.addUsers(response.data.items);
-            this.props.setTotalCount(response.data.totalCount);
+            this.props.addUsers(data.items);
+            this.props.setTotalCount(data.totalCount);
         });
     }
 
     changePage = (page) => {
         this.props.setIsFetching(true);
         this.props.changeCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
-            this.props.addUsers(response.data.items);
+        usersApi.getUsers(page, this.props.pageSize).then(data => {
+            this.props.addUsers(data.items);
             this.props.setIsFetching(false);
         });
     }
