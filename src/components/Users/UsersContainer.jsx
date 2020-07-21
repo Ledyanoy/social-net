@@ -6,7 +6,8 @@ import {
     follow,
     setIsFetching,
     setTotalCount,
-    unfollow
+    unfollow,
+    setButtonDisabled,
 } from "../../redux/users-reducer";
 import React, {Component} from "react";
 import Preloader from "../Common/Preloader/Preloader";
@@ -45,18 +46,22 @@ class UsersContainerApi extends Component {
                    follow={this.props.follow}
                    changePage={this.changePage}
                    users={this.props.users}
+                   isButtonDisabled={this.props.isButtonDisabled}
+                   setButtonDisabled={this.props.setButtonDisabled}
             />
         </>
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         users: state.usersPage.users,
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        isButtonDisabled: state.usersPage.isButtonDisabled,
     }
 }
 
@@ -67,7 +72,8 @@ const UsersContainer = connect(mapStateToProps, {
     addUsers,
     changeCurrentPage,
     setTotalCount,
-    setIsFetching
+    setIsFetching,
+    setButtonDisabled,
 })(UsersContainerApi);
 
 export default UsersContainer;

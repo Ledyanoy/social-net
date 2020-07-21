@@ -4,7 +4,7 @@ const ADD_USERS = 'ADD_USERS';
 const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const IS_FETCHING = 'IS_FETCHING';
-
+const IS_BUTTON_DISABLED = 'IS_BUTTON_DISABLED';
 
 
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
+    isButtonDisabled: [],
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -51,9 +52,16 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state, totalUsersCount: action.count
             }
-            case IS_FETCHING:
+        case IS_FETCHING:
             return {
-                ...state, isFetching:  action.isFetch
+                ...state, isFetching: action.isFetch
+            }
+        case IS_BUTTON_DISABLED:
+            return {
+                ...state,
+                isButtonDisabled: action.isFetch
+                    ? [...state.isButtonDisabled, action.userId]
+                    : state.isButtonDisabled.filter(id => id !== action.userId)
             }
 
         default:
@@ -67,6 +75,7 @@ export const addUsers = (users) => ({type: ADD_USERS, users});
 export const changeCurrentPage = (page) => ({type: CHANGE_CURRENT_PAGE, page});
 export const setTotalCount = (count) => ({type: SET_TOTAL_COUNT, count});
 export const setIsFetching = (isFetch) => ({type: IS_FETCHING, isFetch});
+export const setButtonDisabled = (isFetch, userId) => ({type: IS_BUTTON_DISABLED, isFetch, userId});
 
 
 export default usersReducer;

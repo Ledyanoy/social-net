@@ -6,7 +6,8 @@ import * as axios from "axios";
 import {usersApi} from "../api/api";
 
 
-const User = ({user, follow, unfollow}) => {
+const User = ({user, follow, unfollow, isButtonDisabled, setButtonDisabled}) => {
+    console.log(isButtonDisabled);
     return (
         <li>
             <div>
@@ -27,17 +28,22 @@ const User = ({user, follow, unfollow}) => {
             {user.name}
             {user.status}
             {user.followed
-                ? <button onClick={() => {
+                ? <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
+                    setButtonDisabled(true, user.id);
                     usersApi.unfollowUser(user.id).then(data => {
                         if (data.resultCode !== 0) return;
                         unfollow(user.id);
+                        setButtonDisabled(false,user.id);
                     });
+
                 }}> unfollow </button>
 
-                : <button onClick={() => {
+                : <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
+                    setButtonDisabled(true, user.id);
                     usersApi.followUser(user.id).then(data => {
                         if (data.resultCode !== 0) return;
                         follow(user.id);
+                        setButtonDisabled(false, user.id);
                     });
 
                 }}> follow </button>
