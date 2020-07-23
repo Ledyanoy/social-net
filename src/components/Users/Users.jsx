@@ -6,10 +6,10 @@ import {pagination, selected} from './users.module.css';
 const Users = (props) => {
 
     const userlist = props.users.map(user => <User key={user.id} user={user}
-                                                   follow={props.follow}
-                                                   unfollow={props.unfollow}
+                                                   followTC={props.followTC}
+                                                   unfollowTC={props.unfollowTC}
                                                    isButtonDisabled={props.isButtonDisabled}
-                                                   setButtonDisabled={props.setButtonDisabled}/>);
+                                                   />);
     const pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const pages = [];
     for (let i = 1; i <= pageCount; i++) {

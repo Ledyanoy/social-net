@@ -1,3 +1,5 @@
+import {usersApi} from "../components/api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const ADD_USERS = 'ADD_USERS';
@@ -77,5 +79,37 @@ export const setTotalCount = (count) => ({type: SET_TOTAL_COUNT, count});
 export const setIsFetching = (isFetch) => ({type: IS_FETCHING, isFetch});
 export const setButtonDisabled = (isFetch, userId) => ({type: IS_BUTTON_DISABLED, isFetch, userId});
 
+export const getUsersTC = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setIsFetching(true));
+        usersApi.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setIsFetching(false));
+            dispatch(addUsers(data.items));
+            dispatch(setTotalCount(data.totalCount));
+        });
+    }
+}
+
+export const followTC = (userId) => {
+    return (dispatch) => {
+        dispatch(setButtonDisabled(true, userId));
+        usersApi.unfollowUser(userId).then(data => {
+            if (data.resultCode !== 0) return;
+            dispatch(unfollow(userId));
+            dispatch(setButtonDisabled(false,userId));
+        });
+    }
+}
+
+export const unfollowTC = (userId) => {
+    return (dispatch) => {
+        dispatch(setButtonDisabled(true, userId));
+        usersApi.followUser(userId).then(data => {
+            if (data.resultCode !== 0) return;
+            dispatch(follow(userId));
+            dispatch(setButtonDisabled(false,userId));
+        });
+    }
+}
 
 export default usersReducer;

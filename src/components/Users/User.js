@@ -2,11 +2,10 @@ import React from 'react';
 import userLogo from '../../assets/images/user-logo.jpg'
 import {avatar} from './users.module.css';
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {usersApi} from "../api/api";
 
 
-const User = ({user, follow, unfollow, isButtonDisabled, setButtonDisabled}) => {
+
+const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
     console.log(isButtonDisabled);
     return (
         <li>
@@ -29,22 +28,12 @@ const User = ({user, follow, unfollow, isButtonDisabled, setButtonDisabled}) => 
             {user.status}
             {user.followed
                 ? <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
-                    setButtonDisabled(true, user.id);
-                    usersApi.unfollowUser(user.id).then(data => {
-                        if (data.resultCode !== 0) return;
-                        unfollow(user.id);
-                        setButtonDisabled(false,user.id);
-                    });
+                    followTC(user.id)
 
                 }}> unfollow </button>
 
                 : <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
-                    setButtonDisabled(true, user.id);
-                    usersApi.followUser(user.id).then(data => {
-                        if (data.resultCode !== 0) return;
-                        follow(user.id);
-                        setButtonDisabled(false, user.id);
-                    });
+                    unfollowTC(user.id)
 
                 }}> follow </button>
             }
