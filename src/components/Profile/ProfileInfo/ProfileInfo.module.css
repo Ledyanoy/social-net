@@ -10,3 +10,12 @@
     object-fit: cover;
     border-radius: 50%;
 }
+
+.status {
+    display: block;
+    height: 40px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid white;
+    min-width: 100px;
+}

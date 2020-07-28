@@ -6,7 +6,6 @@ import {NavLink} from "react-router-dom";
 
 
 const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
-    console.log(isButtonDisabled);
     return (
         <li>
             <div>

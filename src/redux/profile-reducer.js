@@ -1,8 +1,9 @@
-import {usersApi} from "../components/api/api";
+import {profileApi, usersApi} from "../components/api/api";
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_VALUE = 'CHANGE-POST-VALUE';
 const SET_PROFILE = 'SET_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 const initialState = {
     postsData: [
@@ -13,6 +14,7 @@ const initialState = {
     ],
     newPostText: 'it-kamasutra',
     profile: null,
+    status: 'This is Heaven',
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -37,6 +39,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile,
             }
+
+        case SET_STATUS :
+            return {
+                ...state,
+                status: action.status,
+            }
         default:
             return state;
     }
@@ -53,6 +61,7 @@ export const addPostActionCreator = () => {
 }
 
 export const setProfile = (profile) => ({type: SET_PROFILE, profile });
+export const setStatus = (status) => ({type: SET_STATUS, status });
 
 export const changeProfile = (userId) => {
     return (dispatch)=> {
@@ -62,5 +71,21 @@ export const changeProfile = (userId) => {
     }
 }
 
+export const getUserStatus = (userId) => {
+    return (dispatch)=> {
+        profileApi.getStatus(userId).then(data => {
+            dispatch(setStatus(data));
+        });
+    }
+}
+
+export const setUserStatus = (status) => {
+    return (dispatch)=> {
+        profileApi.updateStatus(status).then(data => {
+            if (data.resultCode !== 0) return;
+            dispatch(setStatus(status));
+        });
+    }
+}
 
 export default profileReducer;
