@@ -2,36 +2,44 @@ import React, {Component} from 'react';
 
 import {status} from './ProfileInfo.module.css';
 
-class ProfileStatus extends Component{
+class ProfileStatus extends Component {
 
     state = {
         isChanging: false,
         status: this.props.status,
     }
 
-    activateChangeStatus =() => {
+
+    activateChangeStatus = () => {
         this.setState({
             isChanging: true,
         });
     }
 
-    deActivateChangeStatus =() => {
+    deActivateChangeStatus = () => {
         this.setState({
             isChanging: false,
         });
         this.props.setUserStatus(this.state.status)
     }
 
-    onStatusChange =(evt) => {
+    onStatusChange = (evt) => {
         this.setState({
-            status: evt.currentTarget.value ,
+            status: evt.currentTarget.value,
         });
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentdidUpfate');
+        if(prevProps.status === this.props.status) return;
+        this.setState({
+            status: this.props.status
+        });
     }
 
 
     render() {
-        return(
+        return (
             <div>
                 {this.state.isChanging
                     ? <div><input className={status} autoFocus={true} type="text"
@@ -39,7 +47,8 @@ class ProfileStatus extends Component{
                                   onBlur={this.deActivateChangeStatus}
                                   onChange={this.onStatusChange}
                     /></div>
-                    : <div><span className={status} onDoubleClick={this.activateChangeStatus}>{this.props.status}</span></div> }
+                    : <div><span className={status} onDoubleClick={this.activateChangeStatus}>{this.props.status}</span>
+                    </div>}
 
             </div>
         )
