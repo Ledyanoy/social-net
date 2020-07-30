@@ -32,4 +32,13 @@ export const loginTC = () => {
         });
     }
 }
+
+export const tryLogin = (user) => {
+    return (dispatch) => {
+        authApi.tryAuth(user).then(data => {
+            if (data.resultCode !== 0) return;
+            loginTC();
+        });
+    }
+}
 export default authReducer;

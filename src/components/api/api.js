@@ -46,6 +46,9 @@ export const authApi = {
     auth() {
         return instance.get(`auth/me`).then(response => response.data)
     },
+    tryAuth(obj) {
+        return instance.post(`auth/login`, obj).then(response => response.data)
+    },
 
 }
 

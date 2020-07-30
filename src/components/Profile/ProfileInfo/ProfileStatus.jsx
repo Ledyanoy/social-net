@@ -30,7 +30,6 @@ class ProfileStatus extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('componentdidUpfate');
         if(prevProps.status === this.props.status) return;
         this.setState({
             status: this.props.status
