@@ -2,23 +2,33 @@ import React from 'react';
 import {dialogs, dialogList, messages, actions} from './Dialogs.module.css';
 import DialogItem from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import {Field, reduxForm} from "redux-form";
 
 
-const Dialogs = ({dialogsPage, addReplic, messageChange}) => {
+
+const Dialogs = ({dialogsPage, addMessageActionCreator}) => {
 
     const DialogsElements = dialogsPage.dialogsData.map((dialog) => <DialogItem key={dialog.id} state={dialog}/>);
     const MessagesElements = dialogsPage.messageData.map((message) => <Message key={message.id} state={message}/>);
 
 
 
-    const onAddReplic = () => {
-        addReplic();
+    const onAddReplic = (values) => {
+        addMessageActionCreator(values.post)
     }
 
-    const onMessageChange = (e) => {
-        const text = e.target.value;
-        messageChange(text);
+    const newMessageForm =(props) => {
+        return (
+            <form onSubmit={props.handleSubmit} className={actions}>
+                <Field name="post" component="textarea" type="textarea"/>
+                <button type="submit">Написать</button>
+            </form>
+        )
     }
+
+    const NewMessageReduxForm = reduxForm({
+        form: 'newMessage'
+    })(newMessageForm);
 
 
     return (
@@ -29,10 +39,7 @@ const Dialogs = ({dialogsPage, addReplic, messageChange}) => {
             <ul className={messages}>
                 {MessagesElements}
             </ul>
-            <div className={actions}>
-                <input type="text"  value={dialogsPage.newMessageText} onChange={onMessageChange}/>
-                <button onClick={onAddReplic}>Написать</button>
-            </div>
+            <NewMessageReduxForm onSubmit={onAddReplic}/>
         </div>
 
     )

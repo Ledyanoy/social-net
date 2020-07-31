@@ -7,14 +7,12 @@ import {connect} from "react-redux";
 class LoginContainer extends Component {
 
     getValuesFromForm = values => {
-        console.log(values);
         let formObject = {
             email: values.login,
             password: values.password,
             rememberMe: values.rememberMe,
             captcha: true
         };
-        console.log(formObject);
         this.props.tryLogin(formObject);
     }
 

@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const CHANGE_MESSAGE_VALUE = 'CHANGE-MESSAGE-VALUE';
 
 const initialState = {
         dialogsData: [
@@ -39,20 +38,17 @@ const initialState = {
             {id: 5, message: 'You betrying my head, again...', me: true},
             {id: 6, message: 'Khe Khe ;)'},
         ],
-        newMessageText: '',
 }
 
 const dialogReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case CHANGE_MESSAGE_VALUE:
-            return {...state, newMessageText: action.value};
 
         case ADD_MESSAGE:
             return {...state,
                 messageData: [...state.messageData, {
                     id: 2,
-                    message: state.newMessageText,
+                    message: action.post,
                     me: true
                 }],
                 newMessageText: '',
@@ -63,14 +59,8 @@ const dialogReducer = (state = initialState, action) => {
     }
 }
 
-export const changeMessageValueActionCreator = (value) => {
-    const action = {type: CHANGE_MESSAGE_VALUE, value: value};
-    return action;
-}
+export const addMessageActionCreator = (post) => ({type: ADD_MESSAGE, post});
 
-export const addMessageActionCreator = () => {
-    const action = {type: ADD_MESSAGE};
-    return action;
-}
+
 
 export default dialogReducer;

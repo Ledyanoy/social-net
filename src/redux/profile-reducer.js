@@ -1,7 +1,6 @@
 import {profileApi, usersApi} from "../components/api/api";
 
 const ADD_POST = 'ADD-POST';
-const CHANGE_POST_VALUE = 'CHANGE-POST-VALUE';
 const SET_PROFILE = 'SET_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -12,7 +11,6 @@ const initialState = {
         {id: 3, message: 'Falling in Reverse are cool!', likesCount: -100},
         {id: 4, message: 'Limp Bizkit', likesCount: 777},
     ],
-    newPostText: 'it-kamasutra',
     profile: null,
     status: 'This is Heaven',
 }
@@ -20,8 +18,6 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case CHANGE_POST_VALUE:
-            return {...state, newPostText: action.value };
 
         case ADD_POST:
             return {
@@ -29,10 +25,9 @@ const profileReducer = (state = initialState, action) => {
                 postsData: [...state.postsData,
                     {
                         id: 5,
-                        message: state.newPostText,
+                        message: action.post,
                         likesCount: 0,
                     }],
-                newPostText: '',
             }
         case SET_PROFILE :
             return {
@@ -50,13 +45,9 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const changePostValueActionCreator = (value) => {
-    const action = {type: CHANGE_POST_VALUE, value: value};
-    return action;
-}
 
-export const addPostActionCreator = () => {
-    const action = {type: ADD_POST};
+export const addPostActionCreator = (post) => {
+    const action = {type: ADD_POST, post,};
     return action;
 }
 
