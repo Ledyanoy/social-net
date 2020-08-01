@@ -1,0 +1,14 @@
+.formField {
+    display: block;
+}
+
+.formField.error input,
+.formField.error textarea
+{
+    border: 2px solid red;
+}
+
+.formField.error span {
+    display: block;
+    color: red;
+}

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {tryLogin} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {requiredField} from "../../utils/validators/validators";
+import {FormInput} from "../Common/FormFields/FormFields";
 
 
 class LoginContainer extends Component {
@@ -31,13 +33,23 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="login" component="input" type="text"/>
+                <Field name="login"
+                       placeholder='login'
+                       component={FormInput}
+                       type="text"
+                       validate={requiredField}/>
             </div>
             <div>
-                <Field name="password" component="input" type="password"/>
+                <Field name="password"
+                       placeholder='password'
+                       component={FormInput}
+                       type="password"
+                       validate={requiredField}/>
             </div>
             <div>
-                <Field name="rememberMe" component="input" type="checkbox"/>
+                <Field name="rememberMe"
+                       component={FormInput}
+                       type="checkbox"/>
             </div>
             <button type="submit">Submit</button>
         </form>

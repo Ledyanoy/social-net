@@ -3,6 +3,8 @@ import {dialogs, dialogList, messages, actions} from './Dialogs.module.css';
 import DialogItem from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
+import {maxLength, requiredField} from "../../utils/validators/validators";
+import {FormTextarea} from "../Common/FormFields/FormFields";
 
 
 
@@ -16,11 +18,15 @@ const Dialogs = ({dialogsPage, addMessageActionCreator}) => {
     const onAddReplic = (values) => {
         addMessageActionCreator(values.post)
     }
+    const maxLength15 = maxLength(15);
 
     const newMessageForm =(props) => {
         return (
             <form onSubmit={props.handleSubmit} className={actions}>
-                <Field name="post" component="textarea" type="textarea"/>
+                <Field name="post"
+                       component={FormTextarea}
+                       type="textarea"
+                       validate={[requiredField, maxLength15]}/>
                 <button type="submit">Написать</button>
             </form>
         )
