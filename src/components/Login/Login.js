@@ -4,6 +4,8 @@ import {tryLogin} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {requiredField} from "../../utils/validators/validators";
 import {FormInput} from "../Common/FormFields/FormFields";
+import {Redirect} from "react-router-dom";
+import {holeFormError} from './Login.module.css';
 
 
 class LoginContainer extends Component {
@@ -19,6 +21,9 @@ class LoginContainer extends Component {
     }
 
     render() {
+        if (this.props.isAuth) {
+            return  <Redirect to={'/profile'}/>
+        }
         return (
             <div>
                 <h1>Login</h1>
@@ -51,6 +56,8 @@ const LoginForm = (props) => {
                        component={FormInput}
                        type="checkbox"/>
             </div>
+            {props.error && <div className={holeFormError}>{props.error}</div>}
+
             <button type="submit">Submit</button>
         </form>
     )

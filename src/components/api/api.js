@@ -46,8 +46,11 @@ export const authApi = {
     auth() {
         return instance.get(`auth/me`).then(response => response.data)
     },
-    tryAuth(obj) {
+    logIn(obj) {
         return instance.post(`auth/login`, obj).then(response => response.data)
+    },
+    logOut(obj) {
+        return instance.delete(`auth/login`).then(response => response.data)
     },
 
 }

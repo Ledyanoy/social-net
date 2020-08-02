@@ -11,6 +11,10 @@ const Header = (props) => {
                     ? <ul><li>{props.login}</li><li>{props.userId}</li><li>{props.email}</li></ul>
                     : <NavLink className={login} to={'/login'}>Login</NavLink>}
             </div>
+            {
+                props.isAuth && <button onClick={props.tryLogOut}>Logout</button>
+            }
+
         </header>
     )
 }
