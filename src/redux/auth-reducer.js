@@ -26,7 +26,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USE
 
 export const loginTC = () => {
     return (dispatch) => {
-        authApi.auth().then(data => {
+        return authApi.auth().then(data => {
             if (data.resultCode !== 0) return;
             let {id, login, email} = data.data;
             dispatch(setAuthUserData(id, email, login, true));
@@ -52,7 +52,7 @@ export const tryLogin = (user) => {
 
 export const tryLogOut = () => {
     return (dispatch) => {
-        authApi.logOut().then(data => {
+          authApi.logOut().then(data => {
             console.log(data);
             if (data.resultCode !== 0) return;
             dispatch(setAuthUserData(null, null, null, false));
