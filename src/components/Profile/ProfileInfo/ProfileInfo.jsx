@@ -1,7 +1,7 @@
 import React from 'react';
 import {backPic, avatar} from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusHooks from "./ProfileStatusHooks";
 
 
 const ProfileInfo = (props) => {
@@ -22,7 +22,7 @@ const ProfileInfo = (props) => {
                      className={avatar} alt="avatar"/>
                 <p>Description</p>
             </div>
-            <ProfileStatus status={props.status} setUserStatus={props.setUserStatus}/>
+            <ProfileStatusHooks status={props.status} setUserStatus={props.setUserStatus}/>
         </div>
     )
 }
