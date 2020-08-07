@@ -1,7 +1,7 @@
 import {authApi} from "../components/api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'auth/SET_USER_DATA';
 
 
 const initialState = {
@@ -22,16 +22,16 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    data: {userId, email, login, isAuth}
+});
 
-export const loginTC = () => {
-    return (dispatch) => {
-        return authApi.auth().then(data => {
-            if (data.resultCode !== 0) return;
-            let {id, login, email} = data.data;
-            dispatch(setAuthUserData(id, email, login, true));
-        });
-    }
+export const loginTC = () => async (dispatch) => {
+    let data = await authApi.auth()
+    if (data.resultCode !== 0) return;
+    let {id, login, email} = data.data;
+    dispatch(setAuthUserData(id, email, login, true));
 }
 
 export const tryLogin = (user) => {
@@ -42,7 +42,7 @@ export const tryLogin = (user) => {
             if (data.resultCode === 0) {
                 dispatch(loginTC());
             } else {
-                let message = data.messages.length > 0 ? data.messages[0] : 'password or login is wrong' ;
+                let message = data.messages.length > 0 ? data.messages[0] : 'password or login is wrong';
                 let action = stopSubmit('login', {_error: message});
                 dispatch(action);
             }
@@ -52,7 +52,7 @@ export const tryLogin = (user) => {
 
 export const tryLogOut = () => {
     return (dispatch) => {
-          authApi.logOut().then(data => {
+        authApi.logOut().then(data => {
             console.log(data);
             if (data.resultCode !== 0) return;
             dispatch(setAuthUserData(null, null, null, false));

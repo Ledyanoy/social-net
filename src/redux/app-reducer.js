@@ -24,13 +24,12 @@ const appReducer = (state = initialState, action) => {
 
 export const setInit = () => ({type: SET_INIT});
 
-export const setInitTC = () => {
-    return (dispatch) => {
-        let resolve = dispatch(loginTC());
-        resolve.then( () => {
-            dispatch(setInit());
-        })
-    }
+export const setInitTC = () => (dispatch) => {
+    let promise = dispatch(loginTC())
+    Promise.all([promise]).then(() => {
+        dispatch(setInit());
+    })
+
 }
 
 

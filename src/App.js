@@ -24,7 +24,6 @@ class App extends React.Component {
 
     render() {
         if (!this.props.init) {
-            console.log(this.props.init);
             return <Preloader/>
         }
 
