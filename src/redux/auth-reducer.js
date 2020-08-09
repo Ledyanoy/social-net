@@ -28,7 +28,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 });
 
 export const loginTC = () => async (dispatch) => {
-    let data = await authApi.auth()
+    let data = await authApi.auth();
     if (data.resultCode !== 0) return;
     let {id, login, email} = data.data;
     dispatch(setAuthUserData(id, email, login, true));
@@ -36,27 +36,23 @@ export const loginTC = () => async (dispatch) => {
 
 export const tryLogin = (user) => {
 
-    return (dispatch) => {
-        authApi.logIn(user).then(data => {
-            console.log(data);
-            if (data.resultCode === 0) {
-                dispatch(loginTC());
-            } else {
-                let message = data.messages.length > 0 ? data.messages[0] : 'password or login is wrong';
-                let action = stopSubmit('login', {_error: message});
-                dispatch(action);
-            }
-        });
+    return async (dispatch) => {
+        let data = await authApi.logIn(user)
+        if (data.resultCode === 0) {
+            dispatch(loginTC());
+        } else {
+            let message = data.messages.length > 0 ? data.messages[0] : 'password or login is wrong';
+            let action = stopSubmit('login', {_error: message});
+            dispatch(action);
+        }
     }
 }
 
 export const tryLogOut = () => {
-    return (dispatch) => {
-        authApi.logOut().then(data => {
-            console.log(data);
-            if (data.resultCode !== 0) return;
-            dispatch(setAuthUserData(null, null, null, false));
-        });
+    return async (dispatch) => {
+        let data = await authApi.logOut();
+        if (data.resultCode !== 0) return;
+        dispatch(setAuthUserData(null, null, null, false));
     }
 }
 

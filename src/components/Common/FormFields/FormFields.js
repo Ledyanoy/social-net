@@ -1,5 +1,7 @@
 import React from "react";
 import {formField, error} from './FormFields.module.css';
+import {requiredField} from "../../../utils/validators/validators";
+import {Field} from "redux-form";
 
 export const FormTextarea =({input, meta, placeholder,...props})=> {
     return (
@@ -17,4 +19,17 @@ export const FormInput =({input, meta, placeholder, ...props})=> {
             <span>{meta.touched && meta.error && meta.error}</span>
         </div>
     )
+}
+
+export const createFiled = (name, placeholder='', component, validate=[], props, text='') => {
+    return (
+        <div>
+            <Field name={name}
+                   placeholder={placeholder}
+                   component={component}
+                   validate={validate}
+                   {...props}
+            />{text}
+        </div>
+        )
 }

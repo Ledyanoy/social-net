@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {tryLogin} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {requiredField} from "../../utils/validators/validators";
-import {FormInput} from "../Common/FormFields/FormFields";
+import {createFiled, FormInput} from "../Common/FormFields/FormFields";
 import {Redirect} from "react-router-dom";
 import {holeFormError} from './Login.module.css';
 
@@ -34,29 +34,14 @@ class LoginContainer extends Component {
 }
 
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field name="login"
-                       placeholder='login'
-                       component={FormInput}
-                       type="text"
-                       validate={requiredField}/>
-            </div>
-            <div>
-                <Field name="password"
-                       placeholder='password'
-                       component={FormInput}
-                       type="password"
-                       validate={requiredField}/>
-            </div>
-            <div>
-                <Field name="rememberMe"
-                       component={FormInput}
-                       type="checkbox"/>
-            </div>
-            {props.error && <div className={holeFormError}>{props.error}</div>}
+        <form onSubmit={handleSubmit}>
+            {createFiled("login",'login',FormInput, [requiredField] , {type: 'text'})}
+            {createFiled("password",'password',FormInput, [requiredField] , {type: 'password'})}
+            {createFiled("rememberMe",'',FormInput, [], {type: 'checkbox'}, 'Remember me')}
+
+            {error && <div className={holeFormError}>{error}</div>}
 
             <button type="submit">Submit</button>
         </form>

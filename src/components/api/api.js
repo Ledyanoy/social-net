@@ -49,7 +49,7 @@ export const authApi = {
     logIn(obj) {
         return instance.post(`auth/login`, obj).then(response => response.data)
     },
-    logOut(obj) {
+    logOut() {
         return instance.delete(`auth/login`).then(response => response.data)
     },
 
