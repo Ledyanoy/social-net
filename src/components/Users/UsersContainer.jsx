@@ -6,17 +6,19 @@ import {
 } from "../../redux/users-reducer";
 import React, {Component} from "react";
 import Preloader from "../Common/Preloader/Preloader";
-import {getUsers, getUsersSuperSelector} from "../../redux/selectors";
+import { getUsersSuperSelector} from "../../redux/selectors";
 
 class UsersContainerApi extends Component {
 
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
+        const {currentPage,pageSize } = this.props;
+        this.props.getUsersTC(currentPage, pageSize);
 
     }
 
     changePage = (page) => {
-        this.props.getUsersTC(page, this.props.pageSize);
+        const {pageSize} = this.props;
+        this.props.getUsersTC(page, pageSize);
         this.props.changeCurrentPage(page);
     }
 

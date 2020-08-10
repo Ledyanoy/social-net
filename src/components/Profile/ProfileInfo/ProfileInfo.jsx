@@ -2,27 +2,22 @@ import React from 'react';
 import {backPic, avatar} from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusHooks from "./ProfileStatusHooks";
+import noPhoto from "../../../assets/images/no-photo.jpg";
 
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, setUserStatus}) => {
+    if (!profile) {
         return <Preloader/>
     }
 
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img className={backPic}*/}
-            {/*         src="https://pro.eski.mobi/mobile/tez-tour-com/eski/img/TEZ_TOUR_logo_horizontal_cmyk.png"*/}
-            {/*         alt="content-header-image"/>*/}
-            {/*</div>*/}
-
             <div>
-                <img src={props.profile.photos.large}
+                <img src={profile.photos.large ? profile.photos.large : noPhoto}
                      className={avatar} alt="avatar"/>
                 <p>Description</p>
             </div>
-            <ProfileStatusHooks status={props.status} setUserStatus={props.setUserStatus}/>
+            <ProfileStatusHooks status={status} setUserStatus={setUserStatus}/>
         </div>
     )
 }

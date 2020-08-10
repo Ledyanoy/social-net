@@ -1,0 +1,21 @@
+.pagination {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: scroll;
+}
+
+.pagination li {
+    font-size: 20px;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.selected {
+    color: red;
+}
