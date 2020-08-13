@@ -12,7 +12,7 @@ const IS_BUTTON_DISABLED = 'IS_BUTTON_DISABLED';
 
 const initialState = {
     users: [],
-    pageSize: 5,
+    pageSize: 20,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
