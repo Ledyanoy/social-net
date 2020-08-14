@@ -23,7 +23,8 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, changePage, portionS
 
     return (
         <div>
-            {portionNumber > 1 && <button onClick={() => setPortionNumber(portionNumber - 1)}>Назад</button>}
+            {portionNumber > 1 &&
+            <button onClick={() => setPortionNumber(portionNumber - 1)}>Назад</button>}
             <ul className={pagination}>
                 {paginationPages}
             </ul>

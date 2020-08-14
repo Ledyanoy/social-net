@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 
 import Navbar from "./components/Navbar/Navbar";
 
 import {Route, withRouter} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -14,6 +14,8 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {setInitTC} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 
 class App extends React.Component {
@@ -33,7 +35,11 @@ class App extends React.Component {
                 <div className='app-wrapper__content'>
                     <Route path='/dialogs'
                            render={() => {
-                               return <DialogsContainer/>
+                               return (
+                                   <Suspense fallback={<div>Загрузка...</div>}>
+                                       <DialogsContainer/>
+                                   </Suspense>
+                               )
                            }}/>
 
                     <Route path='/profile/:userId?' render={() => {
