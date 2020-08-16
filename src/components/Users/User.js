@@ -11,15 +11,8 @@ const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
             <div>
                 <NavLink to={'/profile/' + user.id}>
                     <picture>
-                        {user.photos.large
-                            ? <source srcSet={user.photos.large} media="(min-width: 600px)"/>
-                            : <source srcSet={userLogo} media="(min-width: 600px)"/>
-                        }
-
-                        {user.photos.small
-                            ? <img src={user.photos.small} alt="MDN" className={avatar}/>
-                            : <img src={userLogo} alt="MDN" className={avatar}/>
-                        }
+                         <source srcSet={user.photos.large  || userLogo } media="(min-width: 600px)"/>
+                         <img src={user.photos.small || userLogo} alt="MDN" className={avatar}/>
                     </picture>
                 </NavLink>
             </div>
