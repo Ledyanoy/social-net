@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {backPic, avatar} from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusHooks from "./ProfileStatusHooks";
@@ -6,13 +6,55 @@ import noPhoto from "../../../assets/images/no-photo.jpg";
 
 
 const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto}) => {
+    const [isChanging, setisChanging] = useState(false);
+
     if (!profile) {
         return <Preloader/>
     }
 
+
+
     const onMainPhotoChange = (evt) => {
         if (!evt.target.files.length) return;
         savePhoto(evt.target.files[0]);
+    };
+
+    const Contact = ({title, value}) => {
+        return <li>{title} : {value ? value : 'empty'}</li>
+    };
+    const toEditMode =() => {
+        setisChanging(true);
+    }
+
+    const ProfileData = ({profile, isOwner, toEditMode}) => {
+        return (
+            <div>
+                {isOwner &&  <button onClick={toEditMode} >Edit Profile</button> }
+                <ul>
+                    <li>Name : {profile.fullName ? profile.fullName : 'empty'}</li>
+                    <li>About : {profile.aboutMe ? profile.aboutMe : 'empty'} </li>
+                    <li>Looking for a Job : {profile.lookingForAJob ? 'yes' : 'no'}</li>
+                    <li>My professional
+                        skills : {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'empty'}</li>
+                    <li>Contacts :
+                        <ul>
+                            {Object.keys(profile.contacts).map(key => <Contact key={key} title={key}
+                                                                               value={profile.contacts[key]}/>)}
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        )
+    };
+
+    const ProfileDataForm = ({profile}) => {
+        return (
+            <div>
+
+
+            </div>
+        )
     };
 
     return (
@@ -21,11 +63,21 @@ const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto}) => {
                 <img src={profile.photos.large ? profile.photos.large : noPhoto}
                      className={avatar} alt="avatar"/>
                 {isOwner && <input type='file' onChange={onMainPhotoChange}/>}
-                <p>Description</p>
+                <div>Status:
+                    <ProfileStatusHooks status={status} setUserStatus={setUserStatus}/>
+                </div>
+                {isChanging
+                    ? <ProfileDataForm profile={profile}/>
+                    : <ProfileData profile={profile}
+                                   isOwner={isOwner}
+                                   toEditMode={toEditMode}/>}
+
             </div>
-            <ProfileStatusHooks status={status} setUserStatus={setUserStatus}/>
+
         </div>
     )
+
+
 }
 
 export default ProfileInfo;
