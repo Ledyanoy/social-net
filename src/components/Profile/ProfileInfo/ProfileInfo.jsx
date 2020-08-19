@@ -3,6 +3,7 @@ import {backPic, avatar} from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import noPhoto from "../../../assets/images/no-photo.jpg";
+import ProfileDataForm from "./ProfileDataForm";
 
 
 const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto}) => {
@@ -48,14 +49,6 @@ const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto}) => {
         )
     };
 
-    const ProfileDataForm = ({profile}) => {
-        return (
-            <div>
-
-
-            </div>
-        )
-    };
 
     return (
         <div>
