@@ -1,4 +1,5 @@
 import {profileApi, usersApi} from "../components/api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'ADD-POST';
 const SET_PROFILE = 'SET_PROFILE';
@@ -90,6 +91,22 @@ export const savePhoto = (file) => {
         let data = await profileApi.savePhoto(file);
         if (data.resultCode !== 0) return;
         dispatch(savePhotoSuccess(data.data.photos));
+    }
+}
+
+export const saveProfile = (profile) => {
+    return async (dispatch, getState) => {
+        const id = getState().auth.userId;
+        let data = await profileApi.saveProfile(profile);
+        if (data.resultCode === 0) {
+            dispatch(changeProfile(id));
+        } else {
+        let message = data.messages.length > 0 ? data.messages[0] : 'password or login is wrong';
+        let action = stopSubmit('UserData', {_error: message});
+        // let action = stopSubmit('UserData', {'contacts': {'facebook':  message }});
+        dispatch(action);
+        return Promise.reject(data.messages[0]);
+        }
     }
 }
 

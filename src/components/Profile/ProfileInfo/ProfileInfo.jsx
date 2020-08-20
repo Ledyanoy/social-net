@@ -3,17 +3,19 @@ import {backPic, avatar} from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import noPhoto from "../../../assets/images/no-photo.jpg";
-import ProfileDataForm from "./ProfileDataForm";
+import ProfileDataReduxForm from "./ProfileDataForm";
 
 
-const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto}) => {
+const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto, saveProfile }) => {
     const [isChanging, setisChanging] = useState(false);
+
+    const onSubmit =(formData) => {
+        saveProfile(formData).then(()=> setisChanging(false));
+    }
 
     if (!profile) {
         return <Preloader/>
     }
-
-
 
     const onMainPhotoChange = (evt) => {
         if (!evt.target.files.length) return;
@@ -60,7 +62,7 @@ const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto}) => {
                     <ProfileStatusHooks status={status} setUserStatus={setUserStatus}/>
                 </div>
                 {isChanging
-                    ? <ProfileDataForm profile={profile}/>
+                    ? <ProfileDataReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData profile={profile}
                                    isOwner={isOwner}
                                    toEditMode={toEditMode}/>}
