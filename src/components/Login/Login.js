@@ -15,7 +15,8 @@ class LoginContainer extends Component {
             email: values.login,
             password: values.password,
             rememberMe: values.rememberMe,
-            captcha: true
+            captcha: values.captcha,
+
         };
         this.props.tryLogin(formObject);
     }
@@ -27,23 +28,26 @@ class LoginContainer extends Component {
         return (
             <div>
                 <h1>Login</h1>
-                <LoginReduxForm onSubmit={this.getValuesFromForm}/>
+                <LoginReduxForm onSubmit={this.getValuesFromForm} captchaUrl={this.props.captchaUrl}/>
             </div>
         )
     }
 }
 
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     return (
         <form onSubmit={handleSubmit}>
             {createFiled("login",'login',FormInput, [requiredField] , {type: 'text'})}
             {createFiled("password",'password',FormInput, [requiredField] , {type: 'password'})}
             {createFiled("rememberMe",'',FormInput, [], {type: 'checkbox'}, 'Remember me')}
 
-            {error && <div className={holeFormError}>{error}</div>}
+            { error && <div className={holeFormError}>{error}</div> }
+            { captchaUrl && <img src={captchaUrl} alt=""/> }
+            { captchaUrl && createFiled("captcha",'',FormInput, [requiredField], {}, 'Введите символы с картинки')}
 
             <button type="submit">Submit</button>
+
         </form>
     )
 }
@@ -54,6 +58,7 @@ let LoginReduxForm = reduxForm({
 
 let mapStateToProps = state => {
     return {
+        captchaUrl: state.auth.captchaUrl,
         isAuth: state.auth.isAuth,
     }
 }

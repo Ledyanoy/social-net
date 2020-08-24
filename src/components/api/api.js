@@ -53,7 +53,7 @@ export const profileApi = {
 
     saveProfile(profile) {
         return instance.put(`profile`, profile ).then(response =>response.data)
-    }
+    },
 }
 
 export const authApi = {
@@ -66,6 +66,13 @@ export const authApi = {
     logOut() {
         return instance.delete(`auth/login`).then(response => response.data)
     },
-
 }
+export const securityApi = {
+    getCaptchaUrl() {
+        return instance.get(`security/get-captcha-url`).then(response => response.data)
+    },
+}
+
+
+
 
