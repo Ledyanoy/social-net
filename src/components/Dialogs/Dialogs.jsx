@@ -4,7 +4,7 @@ import DialogItem from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, requiredField} from "../../utils/validators/validators";
-import {FormTextarea} from "../Common/FormFields/FormFields";
+import {FormInput} from "../Common/FormFields/FormFields";
 
 
 
@@ -24,10 +24,10 @@ const Dialogs = ({dialogsPage, addMessageActionCreator}) => {
         return (
             <form onSubmit={props.handleSubmit} className={actions}>
                 <Field name="post"
-                       component={FormTextarea}
+                       component={FormInput}
                        type="textarea"
                        validate={[requiredField, maxLength15]}/>
-                <button type="submit">Написать</button>
+                <button type="submit" className='btn'>Написать</button>
             </form>
         )
     }

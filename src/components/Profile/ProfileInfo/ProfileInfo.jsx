@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {backPic, avatar} from './ProfileInfo.module.css';
+import {avatar, imageOuter, statusOuter, aboutList} from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import noPhoto from "../../../assets/images/no-photo.jpg";
@@ -32,14 +32,13 @@ const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto, savePr
     const ProfileData = ({profile, isOwner, toEditMode}) => {
         return (
             <div>
-                {isOwner &&  <button onClick={toEditMode} >Edit Profile</button> }
-                <ul>
-                    <li>Name : {profile.fullName ? profile.fullName : 'empty'}</li>
-                    <li>About : {profile.aboutMe ? profile.aboutMe : 'empty'} </li>
-                    <li>Looking for a Job : {profile.lookingForAJob ? 'yes' : 'no'}</li>
-                    <li>My professional
-                        skills : {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'empty'}</li>
-                    <li>Contacts :
+                {isOwner &&  <button className='btn' onClick={toEditMode} >Изменить профиль</button> }
+                <ul className={aboutList}>
+                    <li>Имя : {profile.fullName ? profile.fullName : 'empty'}</li>
+                    <li>О себе : {profile.aboutMe ? profile.aboutMe : 'empty'} </li>
+                    <li>Ищу работу : {profile.lookingForAJob ? 'yes' : 'no'}</li>
+                    <li>Мои навыки : {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'empty'}</li>
+                    <li>Контакты :
                         <ul>
                             {Object.keys(profile.contacts).map(key => <Contact key={key} title={key}
                                                                                value={profile.contacts[key]}/>)}
@@ -55,11 +54,15 @@ const ProfileInfo = ({profile, status, setUserStatus, isOwner, savePhoto, savePr
     return (
         <div>
             <div>
-                <img src={profile.photos.large ? profile.photos.large : noPhoto}
-                     className={avatar} alt="avatar"/>
-                {isOwner && <input type='file' onChange={onMainPhotoChange}/>}
-                <div>Status:
+                <div className={imageOuter}>
+                    <img src={profile.photos.large ? profile.photos.large : noPhoto}
+                         className={avatar} alt="avatar"/>
+                    {isOwner && <input type='file' onChange={onMainPhotoChange}/>}
+                </div>
+                <div className={statusOuter}>
+                    <p>Ваш статус:</p>
                     <ProfileStatusHooks status={status} setUserStatus={setUserStatus}/>
+                    <p>Чтобы сменить статус, нажмите 2 раза по статусу</p>
                 </div>
                 {isChanging
                     ? <ProfileDataReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>

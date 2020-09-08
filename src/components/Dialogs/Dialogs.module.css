@@ -41,11 +41,12 @@
 .message {
     font-size: 20px;
     line-height: 32px;
-    background-color: wheat;
+    background-color: #01be64;
     width: 80%;
     margin-right: auto;
     border-radius: 5px;
     padding: 0 20px;
+    color: white;
 }
 
 .message:not(:last-child){
@@ -53,7 +54,7 @@
 }
 
 .me {
-    background-color: aqua;
+    background-color: #289494;
     margin-right: 0;
     margin-left: auto;
 }
@@ -80,4 +81,9 @@
     display: grid;
     grid-template-columns: 8fr 2fr;
     grid-gap: 20px;
+}
+
+.actions input{
+    width: 100%;
+    margin-left: auto;
 }

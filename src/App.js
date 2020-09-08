@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {setInitTC} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
+import PageNotFound from "./components/404/PageNotFound";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
@@ -63,7 +64,7 @@ class App extends React.Component {
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login/facebook' render={() => <div>facebook</div>}/>
                         <Route path='/login' render={() => <Login/>}/>
-                        <Route path='*' render={() => <div>404 Page not found</div>}/>
+                        <Route path='*' render={() => <PageNotFound/>}/>
                     </Switch>
 
                 </div>

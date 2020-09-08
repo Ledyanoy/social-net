@@ -9,6 +9,13 @@
     height: 200px;
     object-fit: cover;
     border-radius: 50%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.statusOuter {
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .status {
@@ -18,4 +25,15 @@
     max-width: 400px;
     border: 1px solid white;
     min-width: 100px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.aboutList li {
+    margin-bottom: 10px;
+    line-height: 16px;
+}
+.aboutList li ul {
+    margin-top: 10px;
 }

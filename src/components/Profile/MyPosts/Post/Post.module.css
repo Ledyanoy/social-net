@@ -1,5 +1,8 @@
 .item {
-    color: red
+    color: #17313e;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .item img {
@@ -11,4 +14,16 @@
 .like {
     color: green;
     font-size: 14px;
+}
+
+.postDesc {
+    margin-left: 10px;
+}
+
+.postDesc p {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.postDesc button {
+    margin-right: 5px;
 }

@@ -1,10 +1,14 @@
 .item {
-    color: white;
+    color: #9fffd1;
+    margin-bottom: 5px;
+
 }
 
 .link {
-    color: white;
+    color: #9fffd1;
     text-decoration: none;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .link:hover {
@@ -12,6 +16,6 @@
 }
 
 .link.activeLink {
-    color: grey;
+    color: white;
     font-weight: bold;
 }
