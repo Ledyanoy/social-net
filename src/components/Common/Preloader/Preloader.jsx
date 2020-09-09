@@ -1,12 +1,11 @@
 import preloader from "../../../assets/images/810.gif";
 import React from "react";
+import {preloaderOuter, preloaderPic} from './preloader.module.css'
 
 const Preloader = (props) => {
     return (
-        <div style={{backgroundColor: 'red',
-        }}>
-            <img src={preloader} style={{marginLeft: '200px', display: 'block',
-            }}/>
+        <div className={preloaderOuter}>
+            <img src={preloader} className={preloaderPic}/>
         </div>
     )
 }

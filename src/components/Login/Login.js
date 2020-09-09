@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {requiredField} from "../../utils/validators/validators";
 import {createFiled, FormInput} from "../Common/FormFields/FormFields";
 import {Redirect} from "react-router-dom";
-import {holeFormError} from './Login.module.css';
+import {holeFormError, loginOuter, loginFrom, checkBox} from './Login.module.css';
 
 
 class LoginContainer extends Component {
@@ -26,7 +26,7 @@ class LoginContainer extends Component {
             return  <Redirect to={'/profile'}/>
         }
         return (
-            <div>
+            <div className={loginOuter}>
                 <h1>Login</h1>
                 <LoginReduxForm onSubmit={this.getValuesFromForm} captchaUrl={this.props.captchaUrl}/>
             </div>
@@ -37,16 +37,17 @@ class LoginContainer extends Component {
 
 const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={loginFrom}>
             {createFiled("login",'login',FormInput, [requiredField] , {type: 'text'})}
             {createFiled("password",'password',FormInput, [requiredField] , {type: 'password'})}
-            {createFiled("rememberMe",'',FormInput, [], {type: 'checkbox'}, 'Remember me')}
+            <div className={checkBox}>{createFiled("rememberMe",'',FormInput, [], {type: 'checkbox'}, 'Запомнить меня')}</div>
+
 
             { error && <div className={holeFormError}>{error}</div> }
             { captchaUrl && <img src={captchaUrl} alt=""/> }
             { captchaUrl && createFiled("captcha",'',FormInput, [requiredField], {}, 'Введите символы с картинки')}
 
-            <button type="submit">Submit</button>
+            <button type="submit">Войти</button>
 
         </form>
     )

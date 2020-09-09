@@ -3,3 +3,26 @@
     border: 2px solid red;
     color: red;
 }
+
+.loginOuter {
+    text-align: center;
+}
+
+.loginFrom {
+    width: 180px;
+    margin: 0 auto;
+}
+.loginFrom button {
+    margin-right: auto;
+    display: block;
+}
+
+.checkBox div {
+    display: flex;
+    margin: 5px 0;
+    align-items: center;
+}
+
+.checkBox  input {
+    margin-left: 0;
+}

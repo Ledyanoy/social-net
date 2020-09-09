@@ -1,4 +1,4 @@
-import {pagination, selected} from "./Paginator.module.css";
+import {pagination, selected, button,paginator} from "./Paginator.module.css";
 import React, {useState} from "react";
 
 const Paginator = ({totalItemsCount, pageSize, currentPage, changePage, portionSize = 5}) => {
@@ -22,14 +22,14 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, changePage, portionS
         });
 
     return (
-        <div>
+        <div className={paginator}>
             {portionNumber > 1 &&
-            <button onClick={() => setPortionNumber(portionNumber - 1)}>Назад</button>}
+            <button className={button} onClick={() => setPortionNumber(portionNumber - 1)}>Назад</button>}
             <ul className={pagination}>
                 {paginationPages}
             </ul>
             {portionCount > portionNumber &&
-            <button onClick={() => setPortionNumber(portionNumber + 1)}>Вперед</button>}
+            <button className={button} onClick={() => setPortionNumber(portionNumber + 1)}>Вперед</button>}
         </div>
     )
 }

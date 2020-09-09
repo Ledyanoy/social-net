@@ -25,11 +25,13 @@ export const createFiled = (name, placeholder='', component, validate=[], props,
     return (
         <div>
             <Field name={name}
+                   id={name}
                    placeholder={placeholder}
                    component={component}
                    validate={validate}
                    {...props}
-            />{text}
+            />
+            <label htmlFor={name}>{text}</label>
         </div>
         )
 }

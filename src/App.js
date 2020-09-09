@@ -21,10 +21,10 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 
 class App extends React.Component {
 
-    catchAllUnhandledErrors =(error) => {
-        alert( error);
-        console.error('new error', error);
-    }
+    // catchAllUnhandledErrors =(error) => {
+    //     alert( error);
+    //     console.error('new error', error);
+    // }
 
     componentDidMount() {
         this.props.setInitTC();

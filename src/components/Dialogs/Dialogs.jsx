@@ -25,7 +25,7 @@ const Dialogs = ({dialogsPage, addMessageActionCreator}) => {
             <form onSubmit={props.handleSubmit} className={actions}>
                 <Field name="post"
                        component={FormInput}
-                       type="textarea"
+                       type="text"
                        validate={[requiredField, maxLength15]}/>
                 <button type="submit" className='btn'>Написать</button>
             </form>

@@ -8,6 +8,7 @@
   'navbar content';
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 }
 
 .app-wrapper__content {

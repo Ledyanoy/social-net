@@ -2,11 +2,9 @@
     list-style: none;
     padding-left: 0;
     display: flex;
-    width: 100%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow-x: scroll;
+    margin: 0 15px;
+    margin: 0 15px;
+
 }
 
 .pagination li {
@@ -14,8 +12,24 @@
     margin-left: 5px;
     font-weight: bold;
     cursor: pointer;
+    color: #2b9895;
 }
 
-.selected {
-    color: red;
+.pagination .selected {
+    color: #17313e;
+}
+
+.button {
+    background-color: transparent;
+    border: 1px #02bf65 solid;
+    border-radius: 4px;
+    box-shadow: none;
+    height: 30px;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
 }

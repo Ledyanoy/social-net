@@ -2,6 +2,7 @@ import React from 'react';
 import User from "./User";
 
 import Paginator from "../Common/Paginator";
+import {usersLIst} from "./users.module.css";
 
 
 const Users = (props) => {
@@ -14,7 +15,7 @@ const Users = (props) => {
 
 
     return (
-        <div>
+        <div >
             <Paginator totalItemsCount={props.totalUsersCount}
                        pageSize={props.pageSize}
                        currentPage={props.currentPage}
@@ -22,7 +23,7 @@ const Users = (props) => {
             />
 
             <div>
-                <ul>
+                <ul className={usersLIst}>
                     {userList}
                 </ul>
             </div>

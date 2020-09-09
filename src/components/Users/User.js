@@ -1,13 +1,13 @@
 import React from 'react';
 import userLogo from '../../assets/images/user-logo.jpg'
-import {avatar} from './users.module.css';
+import {avatar, userItem} from './users.module.css';
 import {NavLink} from "react-router-dom";
 
 
 
 const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
     return (
-        <li>
+        <li className={userItem}>
             <div>
                 <NavLink to={'/profile/' + user.id}>
                     <picture>
@@ -16,18 +16,18 @@ const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
                     </picture>
                 </NavLink>
             </div>
-            {user.name}
-            {user.status}
+            <p>Имя: {user.name}</p>
+            <p>Статус: {user.status ? user.status : 'нет статуса'}</p>
             {user.followed
                 ? <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
                     followTC(user.id)
 
-                }}> unfollow </button>
+                }}> Отписаться </button>
 
                 : <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
                     unfollowTC(user.id)
 
-                }}> follow </button>
+                }}> Подписаться </button>
             }
 
         </li>
