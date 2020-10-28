@@ -18,6 +18,18 @@ import PageNotFound from "./components/404/PageNotFound";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
+const options = [
+    {name: 'Swedish', value: 'sv'},
+    {name: 'English', value: 'en'},
+    {
+        type: 'group',
+        name: 'Group name',
+        items: [
+            {name: 'Spanish', value: 'es'},
+        ]
+    },
+];
+
 
 class App extends React.Component {
 
@@ -69,6 +81,7 @@ class App extends React.Component {
 
                 </div>
             </div>
+
         );
     }
 }

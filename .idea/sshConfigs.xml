@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="188.68.215.228" id="9d629042-afa1-4f3f-b253-ab51c9da0a1d" port="22112" nameFormat="DESCRIPTIVE" username="picom" />
+    </configs>
+  </component>
+</project>

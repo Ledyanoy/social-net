@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e1557d5d-735b-4762-a89f-ef6ca4620b00" name="188.68.215.228">
+        <fileTransfer rootFolder="/home/picom/workspaces/korenev/unifarma/" accessType="SFTP" host="188.68.215.228" port="22112" sshConfigId="9d629042-afa1-4f3f-b253-ab51c9da0a1d" sshConfig="picom@188.68.215.228:22112 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
