@@ -7,17 +7,42 @@ import {
 import React, {Component} from "react";
 import Preloader from "../Common/Preloader/Preloader";
 import { getUsersSuperSelector} from "../../redux/selectors";
+import {UserType} from "../../types/types";
+import {AppStateType} from "../../redux/redux-store";
+
+type MapTypes = {
+    currentPage: number
+    pageSize: number
+    isFetching: boolean
+    totalUsersCount: number
+    users: Array<UserType>
+    isButtonDisabled: Array<number>
+}
+
+type DispatchTypes = {
+    getUsersTC: (currentPage: number, pageSize:number) => void
+    changeCurrentPage: (page: number) => void
+    followTC: (userId: number)=> void
+    unfollowTC:(userId: number)=> void
+}
+
+type OwnTypes = {
+    pageTitle: string
+}
 
 
-class UsersContainerApi extends Component {
+
+type PropsType = MapTypes & DispatchTypes & OwnTypes
+
+
+class UsersContainerApi extends Component<PropsType> {
 
     componentDidMount() {
         const {currentPage,pageSize } = this.props;
         this.props.getUsersTC(currentPage, pageSize);
-
     }
 
-    changePage = (page) => {
+    changePage = (page: number) => {
         const {pageSize} = this.props;
         this.props.getUsersTC(page, pageSize);
         this.props.changeCurrentPage(page);
@@ -26,6 +51,7 @@ class UsersContainerApi extends Component {
 
     render() {
         return <>
+            <h2>{this.props.pageTitle}</h2>
             {this.props.isFetching ?
                 <Preloader/>
                 : null}
@@ -37,13 +63,12 @@ class UsersContainerApi extends Component {
                    changePage={this.changePage}
                    users={this.props.users}
                    isButtonDisabled={this.props.isButtonDisabled}
-
             />
         </>
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:AppStateType): MapTypes => {
     return {
         users: getUsersSuperSelector(state),
         totalUsersCount: state.usersPage.totalUsersCount,
@@ -55,7 +80,7 @@ const mapStateToProps = (state) => {
 }
 
 
-const UsersContainer = connect(mapStateToProps, {
+const UsersContainer = connect<MapTypes, DispatchTypes, OwnTypes, AppStateType>(mapStateToProps, {
     changeCurrentPage,
     getUsersTC,
     followTC,
