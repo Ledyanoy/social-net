@@ -11,14 +11,14 @@ import {holeFormError, loginOuter, loginFrom, checkBox} from './Login.module.css
 class LoginContainer extends Component {
 
     getValuesFromForm = values => {
-        let formObject = {
-            email: values.login,
-            password: values.password,
-            rememberMe: values.rememberMe,
-            captcha: values.captcha,
-
-        };
-        this.props.tryLogin(formObject);
+        // let formObject = {
+        //     email: values.login,
+        //     password: values.password,
+        //     rememberMe: values.rememberMe,
+        //     captcha: values.captcha,
+        //
+        // };
+        this.props.tryLogin(values.login, values.password, values.rememberMe, values.captcha);
     }
 
     render() {

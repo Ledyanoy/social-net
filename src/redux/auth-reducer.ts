@@ -1,4 +1,4 @@
-import {authApi, securityApi} from "../components/api/api";
+import {authApi, ResultCodeEnum, ResultCodeForCaptchaEnum, securityApi} from "../components/api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA';
@@ -59,7 +59,7 @@ export const setCaptchaUrl = (url: string): SetCaptchaUrlType => ({type: GET_CAP
 
 export const loginTC = () => async (dispatch: any) => {
     let data = await authApi.auth();
-    if (data.resultCode !== 0) return;
+    if (data.resultCode !== ResultCodeEnum.Success) return;
     const {id, login, email} = data.data;
     dispatch(setAuthUserData(id, email, login, true));
 }
@@ -71,14 +71,14 @@ export const getCaptchaUrl = () => async (dispatch: any) => {
 }
 
 
-export const tryLogin = (user: object) => {
+export const tryLogin = (email: string, password: string, rememberMe: boolean, captcha: null | string = null) => {
 
     return async (dispatch: any) => {
-        let data = await authApi.logIn(user)
-        if (data.resultCode === 0) {
+        let data = await authApi.logIn(email, password, rememberMe, captcha)
+        if (data.resultCode === ResultCodeEnum.Success) {
             dispatch(loginTC());
         } else {
-            if (data.resultCode === 10) {
+            if (data.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
                 dispatch(getCaptchaUrl());
             }
             let message = data.messages.length > 0 ? data.messages[0] : 'password or login is wrong';
@@ -91,7 +91,7 @@ export const tryLogin = (user: object) => {
 export const tryLogOut = () => {
     return async (dispatch: any) => {
         let data = await authApi.logOut();
-        if (data.resultCode !== 0) return;
+        if (data.resultCode !== ResultCodeEnum.Success) return;
         dispatch(setAuthUserData(null, null, null, false));
     }
 }
