@@ -2,17 +2,8 @@ import {usersApi} from "../components/api/api";
 import {changeObjectInArray} from "../utils/objectChangers";
 import {UserType} from "../types/types";
 import {Dispatch} from "redux";
-import {AppStateType} from "./redux-store";
+import {AppStateType, inferActionsTypes} from "./redux-store";
 import {ThunkAction} from "redux-thunk";
-
-
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const ADD_USERS = 'ADD_USERS';
-const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
-const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
-const IS_FETCHING = 'IS_FETCHING';
-const IS_BUTTON_DISABLED = 'IS_BUTTON_DISABLED';
 
 
 const initialState = {
@@ -29,34 +20,34 @@ export type InitialStateType = typeof initialState
 const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
-        case FOLLOW:
+        case 'FOLLOW':
             return {
                 ...state, users: changeObjectInArray(state.users, "id", action.userId, {followed: true})
             }
 
-        case UNFOLLOW:
+        case 'UNFOLLOW':
             return {
                 ...state, users: changeObjectInArray(state.users, "id", action.userId, {followed: false})
             }
 
-        case ADD_USERS:
+        case 'ADD_USERS':
             return {
                 ...state, users: action.users
             }
 
-        case CHANGE_CURRENT_PAGE:
+        case 'CHANGE_CURRENT_PAGE':
             return {
                 ...state, currentPage: action.page
             }
-        case SET_TOTAL_COUNT:
+        case 'SET_TOTAL_COUNT':
             return {
                 ...state, totalUsersCount: action.count
             }
-        case IS_FETCHING:
+        case 'IS_FETCHING':
             return {
                 ...state, isFetching: action.isFetch
             }
-        case IS_BUTTON_DISABLED:
+        case 'IS_BUTTON_DISABLED':
             return {
                 ...state,
                 isButtonDisabled: action.isFetch
@@ -69,90 +60,51 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
     }
 }
 
-const followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>, userId: number, apiMethod: any, actionCreator: (userId: number)=> FollowActionType | UnfollowActionType) => {
-    dispatch(setButtonDisabled(true, userId));
+type ActionsTypes = inferActionsTypes<typeof actions>
+
+export const actions = {
+    follow: (userId: number) => ({type: 'FOLLOW', userId} as const),
+    unfollow: (userId: number) => ({type: 'UNFOLLOW', userId} as const),
+    addUsers: (users: Array<UserType>) => ({type: 'ADD_USERS', users} as const),
+    changeCurrentPage: (page: number) => ({type: 'CHANGE_CURRENT_PAGE', page} as const),
+    setTotalCount: (count: number) => ({type: 'SET_TOTAL_COUNT', count} as const),
+    setIsFetching: (isFetch: boolean) => ({type: 'IS_FETCHING', isFetch} as const),
+    setButtonDisabled: (isFetch: boolean, userId: number) => ({
+        type: 'IS_BUTTON_DISABLED',
+        isFetch,
+        userId
+    } as const) ,
+}
+
+const followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionsTypes ) => {
+    dispatch(actions.setButtonDisabled(true, userId));
     let data = await apiMethod(userId);
     if (data.resultCode !== 0) return;
     dispatch(actionCreator(userId));
-    dispatch(setButtonDisabled(false, userId));
+    dispatch(actions.setButtonDisabled(false, userId));
 }
 
-type ActionsTypes =
-    FollowActionType
-    | UnfollowActionType
-    | AddUsersActionType
-    | ChangeCurrentPageActionType
-    | SetTotalCountActionType
-    | SetIsFetchingActionType
-    | SetButtonDisabledActionType
 
-type FollowActionType = {
-    type: typeof FOLLOW
-    userId: number
-}
-export const follow = (userId: number): FollowActionType => ({type: FOLLOW, userId});
-
-type UnfollowActionType = {
-    type: typeof UNFOLLOW
-    userId: number
-}
-export const unfollow = (userId: number): UnfollowActionType => ({type: UNFOLLOW, userId});
-
-type AddUsersActionType = {
-    type: typeof ADD_USERS
-    users: Array<UserType>
-}
-export const addUsers = (users: Array<UserType>): AddUsersActionType => ({type: ADD_USERS, users});
-
-type ChangeCurrentPageActionType = {
-    type: typeof CHANGE_CURRENT_PAGE
-    page: number
-}
-export const changeCurrentPage = (page: number): ChangeCurrentPageActionType => ({type: CHANGE_CURRENT_PAGE, page});
-
-type SetTotalCountActionType = {
-    type: typeof SET_TOTAL_COUNT
-    count: number
-}
-export const setTotalCount = (count: number): SetTotalCountActionType => ({type: SET_TOTAL_COUNT, count});
-
-type SetIsFetchingActionType = {
-    type: typeof IS_FETCHING
-    isFetch: boolean
-}
-export const setIsFetching = (isFetch: boolean): SetIsFetchingActionType => ({type: IS_FETCHING, isFetch});
-
-type SetButtonDisabledActionType = {
-    type: typeof IS_BUTTON_DISABLED
-    isFetch: boolean
-    userId: number
-}
-export const setButtonDisabled = (isFetch: boolean, userId: number): SetButtonDisabledActionType => ({
-    type: IS_BUTTON_DISABLED,
-    isFetch,
-    userId
-});
-
-type ThunkType =  ThunkAction<Promise<void>, AppStateType, any, ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, any, ActionsTypes>
 
 
-export const getUsersTC = (currentPage: number, pageSize: number): ThunkType  => async (dispatch, getState) => {
-    dispatch(setIsFetching(true));
+export const getUsersTC = (currentPage: number, pageSize: number): ThunkType => async (dispatch, getState) => {
+    dispatch(actions.setIsFetching(true));
     let data = await usersApi.getUsers(currentPage, pageSize);
-    dispatch(setIsFetching(false));
-    dispatch(addUsers(data.items));
-    dispatch(setTotalCount(data.totalCount));
+    dispatch(actions.setIsFetching(false));
+    dispatch(actions.addUsers(data.items));
+    dispatch(actions.setTotalCount(data.totalCount));
 }
 
 export const followTC = (userId: number): ThunkType => async (dispatch) => {
     let apiMethod = await usersApi.unfollowUser.bind(usersApi);
-    let actionCreator = unfollow;
+    let actionCreator = actions.unfollow;
     followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
 }
 
-export const unfollowTC = (userId: number): ThunkType  => async (dispatch) => {
+export const unfollowTC = (userId: number): ThunkType => async (dispatch) => {
     let apiMethod = await usersApi.followUser.bind(usersApi);
-    let actionCreator = follow;
+    let actionCreator = actions.follow;
     followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
 }
 

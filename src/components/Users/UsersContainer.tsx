@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    changeCurrentPage,
+    actions,
     getUsersTC, followTC, unfollowTC,
 } from "../../redux/users-reducer";
 import React, {Component} from "react";
@@ -9,6 +9,8 @@ import Preloader from "../Common/Preloader/Preloader";
 import { getUsersSuperSelector} from "../../redux/selectors";
 import {UserType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
+
+const changeCurrentPage = actions.changeCurrentPage
 
 type MapTypes = {
     currentPage: number
