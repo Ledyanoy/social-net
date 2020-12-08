@@ -1,6 +1,7 @@
-import {profileApi, usersApi} from "../components/api/api";
 import {stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
+import {usersApi} from "../components/api/users-api";
+import {profileApi} from "../components/api/profile-api";
 
 const ADD_POST = 'ADD-POST';
 const SET_PROFILE = 'SET_PROFILE';
@@ -85,7 +86,7 @@ export const savePhotoSuccess = (photos: PhotosType ): SavePhotoSuccessActionTyp
 
 export const changeProfile = (userId: number) => {
     return async (dispatch:any) => {
-        let response = await usersApi.getProfile(userId);
+        let response = await profileApi.getProfile(userId);
         dispatch(setProfile(response));
     }
 }
@@ -113,7 +114,7 @@ export const savePhoto = (file: string) => {
     return async (dispatch:any) => {
         let data = await profileApi.savePhoto(file);
         if (data.resultCode !== 0) return;
-        dispatch(savePhotoSuccess(data.data.photos));
+        dispatch(savePhotoSuccess(data.data));
     }
 }
 
