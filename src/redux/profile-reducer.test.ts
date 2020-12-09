@@ -1,7 +1,10 @@
-import profileReducer, {addPostActionCreator} from "./profile-reducer";
-import { expect } from '@testing-library/react/dist/';
+import profileReducer, {actions} from "./profile-reducer";
+import 'jest'
+import '@testing-library/jest-dom/extend-expect'
+
 
 import React from 'react';
+
 
 const initialState = {
     postsData: [
@@ -9,11 +12,14 @@ const initialState = {
         {id: 2, message: 'Bruh', likesCount: 1000},
         {id: 3, message: 'Falling in Reverse are cool!', likesCount: -100},
         {id: 4, message: 'Limp Bizkit', likesCount: 777},
-    ]
+    ],
+    profile: null,
+    status: 'This is Heaven',
+
 }
 
 it('new post should be added', () => {
-    let action = addPostActionCreator('yyyyyyyy');
+    let action = actions.addPostActionCreator('yyyyyyyy');
     let newState = profileReducer(initialState, action);
-    expect(newState.postsData.length).tobe(5);
+    expect(newState.postsData.length).toBe(5);
 });

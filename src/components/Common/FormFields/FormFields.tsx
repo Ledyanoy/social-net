@@ -24,10 +24,10 @@ export const FormTextarea: FormFieldsType = ({input, meta, placeholder, ...props
     )
 }
 
-export const FormInput: FormFieldsType = ({input, meta, placeholder, ...props}) => {
+export const FormInput: FormFieldsType = ({input, meta, placeholder, ...restProps}) => {
     return (
         <div className={style.formField + ' ' + (meta.touched && meta.error && style.error)}>
-            <input {...input} {...props} placeholder={placeholder}/>
+            <input {...input} {...restProps} placeholder={placeholder} />
             <span>{meta.touched && meta.error && meta.error}</span>
         </div>
     )

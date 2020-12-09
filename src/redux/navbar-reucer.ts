@@ -1,3 +1,6 @@
+import {inferActionsTypes} from "./redux-store";
+
+
 type MenuLinkType = {
     link: string
     name: string
@@ -27,8 +30,16 @@ const initialState = {
 
 export type InitialStateType = typeof initialState
 
+const actions = {
+
+}
+
 const navbarReducer = (state = initialState, action: any): InitialStateType => {
     return state;
 }
 
 export default navbarReducer;
+
+
+type ActionsTypes = inferActionsTypes<typeof actions>
+

@@ -11,7 +11,6 @@ const Post = ({message, likesCount}) => {
                 <button>disLike</button>
                 <span className={like}>Like: {likesCount}</span>
             </div>
-
         </li>
     )
 }
