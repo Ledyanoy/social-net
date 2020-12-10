@@ -2,7 +2,7 @@ import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {profileApi} from "../components/api/profile-api";
 import {BaseThunkType, inferActionsTypes} from "./redux-store";
-import {AxiosAdapter} from "axios";
+
 
 
 const initialState = {

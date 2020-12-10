@@ -15,6 +15,7 @@ import {compose} from "redux";
 import {setInitTC} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
 import PageNotFound from "./components/404/PageNotFound";
+import {AppStateType} from "./redux/redux-store";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
@@ -30,13 +31,18 @@ const options = [
     },
 ];
 
+type MapStateType = ReturnType<typeof mapStateToProps>
+type DispatchStateType = {
+    setInitTC: () => void
+}
 
-class App extends React.Component {
 
-    // catchAllUnhandledErrors =(error) => {
-    //     alert( error);
-    //     console.error('new error', error);
-    // }
+class App extends React.Component<MapStateType & DispatchStateType> {
+
+    catchAllUnhandledErrors =(e: PromiseRejectionEvent) => {
+        alert( 'error');
+        console.error('new error');
+    }
 
     componentDidMount() {
         this.props.setInitTC();
@@ -86,7 +92,7 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         init: state.app.init,
     }

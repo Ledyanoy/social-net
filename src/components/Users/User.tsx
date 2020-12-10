@@ -1,11 +1,18 @@
 import React from 'react';
 import userLogo from '../../assets/images/user-logo.jpg'
+// @ts-ignore
 import {avatar, userItem} from './users.module.css';
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../types/types";
 
+type PropsType = {
+    user: UserType
+    followTC: (id:number)=> void
+    unfollowTC: (id: number)=> void
+    isButtonDisabled: Array<number>
+}
 
-
-const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
+const User:React.FC<PropsType> = ({user, followTC, unfollowTC, isButtonDisabled}) => {
     return (
         <li className={userItem}>
             <div>
@@ -29,7 +36,6 @@ const User = ({user, followTC, unfollowTC, isButtonDisabled}) => {
 
                 }}> Подписаться </button>
             }
-
         </li>
     )
 }

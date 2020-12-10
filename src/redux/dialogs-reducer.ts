@@ -50,7 +50,6 @@ const initialState = {
         {id: 5, message: 'You betrying my head, again...', me: true},
         {id: 6, message: 'Khe Khe ;)'},
     ] as Array<MessageType>,
-    newMessageText: '',
 }
 
 export type InitialStateType = typeof initialState
@@ -67,7 +66,6 @@ const dialogReducer = (state = initialState, action: ActionsTypes): InitialState
                     message: action.post,
                     me: true,
                 }],
-                newMessageText: '',
             };
 
         default:
@@ -76,7 +74,7 @@ const dialogReducer = (state = initialState, action: ActionsTypes): InitialState
 }
 
 export const actions = {
-    addMessageActionCreator: (post: string) => ({type: 'SN/DIALOGS/ADD-MESSAGE', post} as const)
+    addMessage: (post: string) => ({type: 'SN/DIALOGS/ADD-MESSAGE', post} as const)
 }
 
 export default dialogReducer;

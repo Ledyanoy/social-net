@@ -3,7 +3,7 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {tryLogin} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {requiredField} from "../../utils/validators/validators";
-import {createFiled, FormInput} from "../Common/FormFields/FormFields";
+import {createFiled, FormInput, GetStringKeys} from "../Common/FormFields/FormFields";
 import {Redirect} from "react-router-dom";
 import style from './Login.module.css';
 import {AppStateType} from "../../redux/redux-store";
@@ -47,7 +47,7 @@ export type LoginFormValuesTypes = {
     rememberMe:boolean
 }
 
-type LoginFormValuesTypesValues = Extract<keyof LoginFormValuesTypes, string>
+export type LoginFormValuesTypesValues = GetStringKeys<LoginFormValuesTypes>
 
 
 const LoginForm:React.FC<InjectedFormProps<LoginFormValuesTypes, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, error, captchaUrl}) => {

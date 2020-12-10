@@ -1,6 +1,6 @@
 import React from "react";
 import style from './FormFields.module.css';
-import {requiredField, ValidatorType} from "../../../utils/validators/validators";
+import {ValidatorType} from "../../../utils/validators/validators";
 import {Field} from "redux-form";
 
 
@@ -47,3 +47,5 @@ export function createFiled<FormKeysType extends string>(name: FormKeysType, pla
     </div>
     )
 }
+
+export type GetStringKeys<T> =  Extract<keyof T, string>
