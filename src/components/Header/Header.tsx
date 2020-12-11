@@ -1,8 +1,22 @@
 import React from "react";
+// @ts-ignore
 import {header, login, userInfo, loginButton} from './Header.module.css';
 import {NavLink} from "react-router-dom";
 
-const Header = (props) => {
+export type MapPropsType = {
+    isAuth: boolean
+    login: string | null
+    userId: number | null
+    email: string | null
+
+}
+
+export type DispatchPropsType = {
+    tryLogOut: ()=> void
+}
+
+
+const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     return (
         <header className={header}>
             <img src="https://cdn.worldvectorlogo.com/logos/puma-logo.svg" alt="logo" />

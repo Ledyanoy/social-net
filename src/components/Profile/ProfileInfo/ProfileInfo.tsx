@@ -8,7 +8,7 @@ import ProfileDataReduxForm from "./ProfileDataForm";
 import {ProfileContactsType, ProfileType} from "../../../types/types";
 
 type PropsProfileInfoType = {
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
     setUserStatus:(status: string) => void
     isOwner: boolean

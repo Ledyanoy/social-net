@@ -1,7 +1,8 @@
 import React from 'react';
+// @ts-ignore
 import {title, description} from './PageNotFound.module.css'
 
-const PageNotFound = () => {
+const PageNotFound: React.FC = () => {
     return (
         <div>
             <p className={title}>404</p>

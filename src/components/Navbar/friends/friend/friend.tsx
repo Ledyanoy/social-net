@@ -1,9 +1,14 @@
 import React from 'react';
+// @ts-ignore
 import {item, active, link, avatar} from './../friends.module.css';
 import {NavLink} from "react-router-dom";
+import {FriendType} from "../../../../redux/navbar-reucer";
 
+type PropsType = {
+    state: FriendType
+}
 
-const Friend = ({state}) => {
+const Friend:React.FC<PropsType> = ({state}) => {
     return (
         <li className={item}>
             <NavLink to={`/dialogs/${state.id}`} activeClassName={active} className={link}>

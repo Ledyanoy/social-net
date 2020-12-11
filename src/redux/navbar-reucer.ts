@@ -1,13 +1,13 @@
 import {inferActionsTypes} from "./redux-store";
 
 
-type MenuLinkType = {
+export type MenuLinkType = {
     link: string
     name: string
     id: number
 }
 
-type FriendType = {
+export type FriendType = {
     id: number
     name: string
     img: string

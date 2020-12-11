@@ -1,12 +1,12 @@
 import {inferActionsTypes} from "./redux-store";
 
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
     img?: string
 }
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
     me?: boolean

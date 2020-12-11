@@ -1,12 +1,11 @@
 import React, {Component} from "react";
-
-import Header from "./Header";
+import Header, {MapPropsType, DispatchPropsType} from "./Header";
 import {tryLogOut} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
 
-
-class HeaderContainer extends Component  {
+class HeaderContainer extends Component<MapPropsType & DispatchPropsType>  {
 
     render() {
         return (
@@ -15,7 +14,7 @@ class HeaderContainer extends Component  {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:AppStateType) => {
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login,
@@ -24,4 +23,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {tryLogOut})(HeaderContainer);
+export default connect<MapPropsType, DispatchPropsType, {}, AppStateType>(mapStateToProps, {tryLogOut})(HeaderContainer);

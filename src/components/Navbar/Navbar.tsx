@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import {navbar} from './Navbar.module.css';
 import NavMenuContainer from "./navMenu/menuItem/NavMenuContainer";
 import FriendsContainer from "./friends/FriendsContainer";

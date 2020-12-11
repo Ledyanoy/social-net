@@ -8,22 +8,25 @@ import {createFiled, FormInput, GetStringKeys} from "../../Common/FormFields/For
 import {PostType} from "../../../types/types";
 
 
-type PropsType = {
+export type MapPropsType = {
     postsData: Array<PostType>
-    addPostActionCreator: (post: string)=> void
+}
+
+export type DispatchPropsType = {
+    addPost: (post: string)=> void
 }
 
 type NewPostType = {
     post: string
 }
 
-const MyPosts: React.FC<PropsType> = ({postsData, addPostActionCreator}) => {
+const MyPosts: React.FC<MapPropsType & DispatchPropsType> = ({postsData, addPost}) => {
 
     const Posts = postsData.map(({message, likesCount, id}) => <Post message={message} key={id} likesCount={likesCount}/>)
 
 
     const onAddPost =(values:NewPostType) => {
-        addPostActionCreator(values.post);
+        addPost(values.post);
     }
 
 

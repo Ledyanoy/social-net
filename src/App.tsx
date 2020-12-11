@@ -98,7 +98,7 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {setInitTC})
 )(App);

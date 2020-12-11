@@ -1,8 +1,14 @@
 import React from 'react';
+// @ts-ignore
 import {item, activeLink, link} from './menuItem.module.css';
 import {NavLink} from "react-router-dom";
 
-const MenuItem = (props) => {
+type PropsType = {
+    link: string
+    name: string
+}
+
+const MenuItem:React.FC<PropsType> = (props) => {
 
     return (
             <li className={item}>

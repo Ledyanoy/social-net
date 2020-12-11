@@ -8,14 +8,14 @@ import {compose} from "redux";
 import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
 
-type MapProps = ReturnType<typeof mapStateToProps>
+export type MapProps = ReturnType<typeof mapStateToProps>
 
-type MapDispatchPropsType = {
+export type MapDispatchPropsType = {
     changeProfile: (userId: number)=> void
     getUserStatus: (userId: number)=> void
     setUserStatus: (text: string)=> void
     savePhoto: (file: File)=> void
-    saveProfile: (profile: ProfileType)=> void
+    saveProfile: (profile: ProfileType)=> Promise<any>
 }
 
 type PathParamsType = {
