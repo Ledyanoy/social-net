@@ -1,9 +1,10 @@
 import {changeObjectInArray} from "../utils/objectChangers";
 import {UserType} from "../types/types";
 import {Dispatch} from "redux";
-import { BaseThunkType, inferActionsTypes} from "./redux-store";
+import {BaseThunkType, inferActionsTypes} from "./redux-store";
 
 import {usersApi} from "../components/api/users-api";
+import {ApiResponseType} from "../components/api/api";
 
 
 const initialState = {
@@ -69,10 +70,10 @@ export const actions = {
         type: 'SN/USERS/IS_BUTTON_DISABLED',
         isFetch,
         userId
-    } as const) ,
+    } as const),
 }
 
-const followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionsTypes ) => {
+const followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>, userId: number, apiMethod:(userId: number)=> Promise<ApiResponseType>, actionCreator: (userId: number) => ActionsTypes) => {
     dispatch(actions.setButtonDisabled(true, userId));
     let data = await apiMethod(userId);
     if (data.resultCode !== 0) return;
@@ -88,16 +89,16 @@ export const getUsersTC = (currentPage: number, pageSize: number): ThunkType => 
     dispatch(actions.setTotalCount(data.totalCount));
 }
 
-export const followTC = (userId: number): ThunkType => async (dispatch) => {
+export const unfollowTC = (userId: number): ThunkType => async (dispatch) => {
     let apiMethod = await usersApi.unfollowUser.bind(usersApi);
     let actionCreator = actions.unfollow;
-    followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
+    await followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
 }
 
-export const unfollowTC = (userId: number): ThunkType => async (dispatch) => {
+export const followTC = (userId: number): ThunkType => async (dispatch) => {
     let apiMethod = await usersApi.followUser.bind(usersApi);
     let actionCreator = actions.follow;
-    followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
+    await followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
 }
 
 export default usersReducer;

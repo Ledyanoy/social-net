@@ -27,12 +27,12 @@ const User:React.FC<PropsType> = ({user, followTC, unfollowTC, isButtonDisabled}
             <p>Статус: {user.status ? user.status : 'нет статуса'}</p>
             {user.followed
                 ? <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
-                    followTC(user.id)
+                    unfollowTC(user.id)
 
                 }}> Отписаться </button>
 
                 : <button disabled={isButtonDisabled.some(id=> id === user.id)} onClick={() => {
-                    unfollowTC(user.id)
+                    followTC(user.id)
 
                 }}> Подписаться </button>
             }
