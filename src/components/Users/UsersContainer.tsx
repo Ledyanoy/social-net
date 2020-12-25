@@ -2,11 +2,11 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {
     actions,
-    getUsersTC, followTC, unfollowTC,
+    getUsersTC, followTC, unfollowTC, FilterType,
 } from "../../redux/users-reducer";
 import React, {Component} from "react";
 import Preloader from "../Common/Preloader/Preloader";
-import { getUsersSuperSelector} from "../../redux/selectors";
+import {getUsersFilter, getUsersSuperSelector} from "../../redux/selectors";
 import {UserType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
 
@@ -19,10 +19,11 @@ type MapTypes = {
     totalUsersCount: number
     users: Array<UserType>
     isButtonDisabled: Array<number>
+    filter: FilterType
 }
 
 type DispatchTypes = {
-    getUsersTC: (currentPage: number, pageSize:number) => void
+    getUsersTC: (currentPage: number, pageSize:number, filter: FilterType) => void
     changeCurrentPage: (page: number) => void
     followTC: (userId: number)=> void
     unfollowTC:(userId: number)=> void
@@ -40,14 +41,19 @@ type PropsType = MapTypes & DispatchTypes & OwnTypes
 class UsersContainerApi extends Component<PropsType> {
 
     componentDidMount() {
-        const {currentPage,pageSize } = this.props;
-        this.props.getUsersTC(currentPage, pageSize);
+        const {currentPage,pageSize, filter } = this.props;
+        this.props.getUsersTC(currentPage, pageSize, filter);
     }
 
     changePage = (page: number) => {
-        const {pageSize} = this.props;
-        this.props.getUsersTC(page, pageSize);
+        const {pageSize, filter} = this.props;
+        this.props.getUsersTC(page, pageSize, filter);
         this.props.changeCurrentPage(page);
+    }
+
+    onFilterChanged = (filter:FilterType) => {
+        const {pageSize} = this.props;
+        this.props.getUsersTC(1, pageSize, filter);
     }
 
 
@@ -65,6 +71,7 @@ class UsersContainerApi extends Component<PropsType> {
                    changePage={this.changePage}
                    users={this.props.users}
                    isButtonDisabled={this.props.isButtonDisabled}
+                   onFilterChanged={this.onFilterChanged}
             />
         </>
     }
@@ -78,6 +85,7 @@ const mapStateToProps = (state:AppStateType): MapTypes => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         isButtonDisabled: state.usersPage.isButtonDisabled,
+        filter: getUsersFilter(state)
     }
 }
 

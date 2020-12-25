@@ -10,6 +10,10 @@ export const getUsersSelector = (state: AppStateType) => {
     return getUsers(state).filter(u => true);
 }
 
+export const getUsersFilter = (state: AppStateType) => {
+    return state.usersPage.filter
+}
+
 export const getUsersSuperSelector = createSelector(getUsers, (users)=> {
        return  users.filter(u => true)
     }

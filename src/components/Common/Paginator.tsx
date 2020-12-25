@@ -12,11 +12,10 @@ type PropsType = {
 
 const Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, changePage, portionSize = 5}) => {
     const pageCount: number = Math.ceil(totalItemsCount / pageSize);
-    const pages:Array<number> = [];
+    const pages: Array<number> = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
-    }
-    ;
+    };
 
     let portionCount = Math.ceil(pageCount / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
