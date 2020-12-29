@@ -1,35 +1,41 @@
 import React from "react";
-// @ts-ignore
-import {header, login, userInfo, loginButton} from './Header.module.css';
+
+import style from './Header.module.css';
 import {NavLink} from "react-router-dom";
-
-export type MapPropsType = {
-    isAuth: boolean
-    login: string | null
-    userId: number | null
-    email: string | null
-
-}
-
-export type DispatchPropsType = {
-    tryLogOut: ()=> void
-}
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {tryLogOut} from "../../redux/auth-reducer";
 
 
-const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+type PropsType = {}
+
+export const Header: React.FC<PropsType> = (props) => {
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+    const login = useSelector((state: AppStateType) => state.auth.login)
+    const userId = useSelector((state: AppStateType) => state.auth.userId)
+    const email = useSelector((state: AppStateType) => state.auth.email)
+
+    const dispatch = useDispatch()
+
+    const onButtonClick = () => {
+        dispatch(tryLogOut());
+    }
+
     return (
-        <header className={header}>
-            <img src="https://cdn.worldvectorlogo.com/logos/puma-logo.svg" alt="logo" />
-            <div className={login}>
-                {props.isAuth
-                    ? <ul className={userInfo}><li>{props.login}</li><li>{props.userId}</li><li>{props.email}</li></ul>
-                    : <NavLink className={loginButton} to={'/login'}>Войти</NavLink>}
+        <header className={style.header}>
+            <img src="https://cdn.worldvectorlogo.com/logos/puma-logo.svg" alt="logo"/>
+            <div className={style.login}>
+                {isAuth
+                    ? <ul className={style.userInfo}>
+                        <li>{login}</li>
+                        <li>{userId}</li>
+                        <li>{email}</li>
+                    </ul>
+                    : <NavLink className={style.loginButton} to={'/login'}>Войти</NavLink>}
             </div>
             {
-                props.isAuth && <button className={loginButton} onClick={props.tryLogOut}>Выйти</button>
+                isAuth && <button className={style.loginButton} onClick={onButtonClick}>Выйти</button>
             }
-
         </header>
     )
 }
-export default Header;

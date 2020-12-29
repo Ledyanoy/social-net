@@ -1,7 +1,8 @@
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import React from "react";
 import {FilterType} from "../../redux/users-reducer";
-import {Simulate} from "react-dom/test-utils";
+import {useSelector} from "react-redux";
+import {getUsersFilter} from "../../redux/selectors";
 
 const userSearchFormValidate = (values: any) => {
     const errors = {};
@@ -11,12 +12,14 @@ const userSearchFormValidate = (values: any) => {
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void
 }
+type FriendFormType = 'true' | 'false' | 'null';
 type FromValuesType = {
     term: string,
-    friend: 'true' | 'false' | 'null'
+    friend: FriendFormType
 }
 
 export const UserSearchForm: React.FC<PropsType> = React.memo((props) => {
+    const filter = useSelector(getUsersFilter)
 
     const submit = (values: FromValuesType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
         const convertedValues: FilterType = {
@@ -24,7 +27,7 @@ export const UserSearchForm: React.FC<PropsType> = React.memo((props) => {
             friend: values.friend === 'null' ? null : values.friend === 'true' ? true : false
         }
         props.onFilterChanged(convertedValues);
-        console.log(values);
+
         setTimeout(() => {
 
             // alert(JSON.stringify(values, null, 2));
@@ -37,10 +40,9 @@ export const UserSearchForm: React.FC<PropsType> = React.memo((props) => {
 
     return (<div>
 
-        <h1>Any place in your app!</h1>
-
         <Formik
-            initialValues={{term: '', friend: 'null'}}
+            enableReinitialize
+            initialValues={{term: filter.term, friend: String(filter.friend) as FriendFormType}}
             validate={userSearchFormValidate}
             onSubmit={submit}
         >

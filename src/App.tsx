@@ -3,19 +3,18 @@ import './App.css';
 
 import Navbar from "./components/Navbar/Navbar";
 
-import  {Route, withRouter, Switch, Redirect} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
-
-import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import {LoginPage} from "./components/Login/LoginPage";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {setInitTC} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
 import PageNotFound from "./components/404/PageNotFound";
 import {AppStateType} from "./redux/redux-store";
+import {UsersPage} from "./components/Users/UsersContainer";
+import {Header} from "./components/Header/Header";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
@@ -60,7 +59,7 @@ class App extends React.Component<MapStateType & DispatchStateType> {
 
         return (
             <div className='app-wrapper'>
-                <HeaderContainer/>
+                <Header/>
                 <Navbar/>
                 <div className='app-wrapper__content'>
                     <Switch>
@@ -79,9 +78,9 @@ class App extends React.Component<MapStateType & DispatchStateType> {
                             return <ProfileContainer/>
                         }}/>
 
-                        <Route path='/users' render={() => <UsersContainer pageTitle={'Самураи'}/>}/>
+                        <Route path='/users' render={() => <UsersPage pageTitle={'Самураи'}/>}/>
                         <Route path='/login/facebook' render={() => <div>facebook</div>}/>
-                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/login' render={() => <LoginPage/>}/>
                         <Route path='*' render={() => <PageNotFound/>}/>
                     </Switch>
 
