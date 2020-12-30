@@ -40,7 +40,6 @@ const ProfileInfo: React.FC<PropsProfileInfoType> = ({profile, status, setUserSt
     };
 
 
-
     const Contact: React.FC<{title : string, value: string }> = ({title, value}) => {
         return <li>{title} : {value ? value : 'empty'}</li>
     };
