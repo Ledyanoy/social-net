@@ -2,12 +2,11 @@ import React, {Suspense} from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 
-import {Layout, Menu, Breadcrumb} from 'antd';
-import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
 
-import Navbar from "./components/Navbar/Navbar";
+import {Breadcrumb, Layout, Menu} from 'antd';
+import {LaptopOutlined, NotificationOutlined, UserOutlined} from '@ant-design/icons';
 
-import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {Link, Redirect, Route, Switch, withRouter} from "react-router-dom";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {LoginPage} from "./components/Login/LoginPage";
@@ -18,11 +17,10 @@ import Preloader from "./components/Common/Preloader/Preloader";
 import PageNotFound from "./components/404/PageNotFound";
 import {AppStateType} from "./redux/redux-store";
 import {UsersPage} from "./components/Users/UsersContainer";
-// import {Header} from "./components/Header/Header";
-import {Button} from "antd";
+import {AppHeader} from "./components/Header/Header";
 
 const {SubMenu} = Menu;
-const {Header, Content, Footer, Sider} = Layout;
+const {Content, Footer, Sider} = Layout;
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
@@ -72,14 +70,7 @@ class App extends React.Component<MapStateType & DispatchStateType> {
             //
             // </div>
             <Layout>
-                <Header className="header">
-                    <div className="logo"/>
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                        <Menu.Item key="1">nav 1</Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
-                    </Menu>
-                </Header>
+                <AppHeader/>
                 <Content style={{padding: '0 50px'}}>
                     <Breadcrumb style={{margin: '16px 0'}}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -90,27 +81,28 @@ class App extends React.Component<MapStateType & DispatchStateType> {
                         <Sider className="site-layout-background" width={200}>
                             <Menu
                                 mode="inline"
-                                defaultSelectedKeys={['1']}
+                                // defaultSelectedKeys={['1']}
                                 defaultOpenKeys={['sub1']}
                                 style={{height: '100%'}}
                             >
-                                <SubMenu key="sub1" icon={<UserOutlined/>} title="subnav 1">
-                                    <Menu.Item key="1">option1</Menu.Item>
-                                    <Menu.Item key="2">option2</Menu.Item>
-                                    <Menu.Item key="3">option3</Menu.Item>
-                                    <Menu.Item key="4">option4</Menu.Item>
+                                <SubMenu key="sub1" icon={<UserOutlined/>} title="My Profile">
+                                    <Menu.Item key="1">
+                                        <Link to='/profile'>Profile</Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="2">
+                                        <Link to='/dialogs'>Dialogs</Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="3">
+                                        <Link to='/news'>News</Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="4">
+                                        <Link to='/bookmarks'>Bookmarks</Link>
+                                    </Menu.Item>
                                 </SubMenu>
-                                <SubMenu key="sub2" icon={<LaptopOutlined/>} title="subnav 2">
-                                    <Menu.Item key="5">option5</Menu.Item>
-                                    <Menu.Item key="6">option6</Menu.Item>
-                                    <Menu.Item key="7">option7</Menu.Item>
-                                    <Menu.Item key="8">option8</Menu.Item>
-                                </SubMenu>
-                                <SubMenu key="sub3" icon={<NotificationOutlined/>} title="subnav 3">
-                                    <Menu.Item key="9">option9</Menu.Item>
-                                    <Menu.Item key="10">option10</Menu.Item>
-                                    <Menu.Item key="11">option11</Menu.Item>
-                                    <Menu.Item key="12">option12</Menu.Item>
+                                <SubMenu key="sub2" icon={<LaptopOutlined/>} title="Developers">
+                                    <Menu.Item key="4">
+                                        <Link to='/users'>users</Link>
+                                    </Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </Sider>
@@ -137,7 +129,7 @@ class App extends React.Component<MapStateType & DispatchStateType> {
                         </Content>
                     </Layout>
                 </Content>
-                <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{textAlign: 'center'}}>Samurai Social Network  ©2020 Created by IT_KAMASUTRA</Footer>
             </Layout>
 
         );
