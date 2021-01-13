@@ -23,6 +23,7 @@ const {SubMenu} = Menu;
 const {Content, Footer, Sider} = Layout;
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ChatPage = React.lazy(() => import('./page/chat/ChatPage'));
 
 const options = [
     {name: 'Swedish', value: 'sv'},
@@ -98,6 +99,10 @@ class App extends React.Component<MapStateType & DispatchStateType> {
                                     <Menu.Item key="4">
                                         <Link to='/bookmarks'>Bookmarks</Link>
                                     </Menu.Item>
+                                    <Menu.Item key="4">
+                                        <Link to='/chat'>Chat</Link>
+                                    </Menu.Item>
+
                                 </SubMenu>
                                 <SubMenu key="sub2" icon={<LaptopOutlined/>} title="Developers">
                                     <Menu.Item key="4">
@@ -124,12 +129,21 @@ class App extends React.Component<MapStateType & DispatchStateType> {
                                 <Route path='/users' render={() => <UsersPage pageTitle={'Самураи'}/>}/>
                                 <Route path='/login/facebook' render={() => <div>facebook</div>}/>
                                 <Route path='/login' render={() => <LoginPage/>}/>
+
+                                <Route path='/chat'
+                                       render={() => {
+                                           return (
+                                               <Suspense fallback={<div>Загрузка...</div>}>
+                                                   <ChatPage/>
+                                               </Suspense>
+                                           )
+                                       }}/>
                                 <Route path='*' render={() => <PageNotFound/>}/>
                             </Switch>
                         </Content>
                     </Layout>
                 </Content>
-                <Footer style={{textAlign: 'center'}}>Samurai Social Network  ©2020 Created by IT_KAMASUTRA</Footer>
+                <Footer style={{textAlign: 'center'}}>Samurai Social Network ©2020 Created by IT_KAMASUTRA</Footer>
             </Layout>
 
         );
