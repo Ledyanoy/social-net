@@ -1,6 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import {message} from "antd";
 
 const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
+export type ChatMessageType = {
+    message: string
+    photo: string
+    userId: number
+    userName: string
+}
 
 export const ChatPage: React.FC = () => {
     return (
@@ -11,13 +19,6 @@ export const ChatPage: React.FC = () => {
 };
 
 const Chat: React.FC = () => {
-    useEffect(()=> {
-        ws.addEventListener('message', (e)=> {
-            console.log(JSON.parse(e.data));
-        })
-    }, [])
-
-
     return (
         <div>
             <Messages/>
@@ -27,29 +28,32 @@ const Chat: React.FC = () => {
 };
 
 const Messages: React.FC = () => {
+    const [messages, setMessages] = useState<Array<ChatMessageType>>([])
 
-    const messages = [1,2,3,4]
+    useEffect(() => {
+        ws.addEventListener('message', (e) => {
+            console.log(JSON.parse(e.data));
+            let newMessages = JSON.parse(e.data);
+            setMessages(prevMessages =>[...prevMessages, ...newMessages]);
+        })
+    }, [])
+
+
     return (
-        <ul style={ {height: '500px', overflow: 'auto'}}>
-            {messages.map((m: any) => <Message key={m}/>)}
-            {messages.map((m: any) => <Message key={m}/>)}
-            {messages.map((m: any) => <Message key={m}/>)}
+        <ul style={{height: '500px', overflow: 'auto'}}>
+            {messages.map((m, index) => <Message key={index} message={m}/>)}
+
         </ul>
     );
 };
 
-const Message: React.FC = () => {
-    const message = {
-        url: 'https://via.placeholder.com/30',
-        author: 'dima',
-        text: 'dsfgdsfgdsf',
-    }
+const Message: React.FC<{message: ChatMessageType}> = ({message}) => {
 
     return (
         <li>
-            <img src={message.url}/>
-            <p><b>{message.author}</b></p>
-            <p>{message.text}</p>
+            <img src={message.photo}/>
+            <p><b>{message.userName}</b></p>
+            <p>{message.message}</p>
             <hr/>
 
         </li>
@@ -58,11 +62,18 @@ const Message: React.FC = () => {
 
 
 const AddMessageForm: React.FC = () => {
+    const[message, setMessage] = useState('')
+
+    const sendMessage = () => {
+        if(!message) return;
+        ws.send(message)
+        setMessage('')
+    };
+
     return (
         <div>
-            <div><textarea/></div>
-            <button>send</button>
-
+            <div><textarea onChange={(e)=> setMessage(e.currentTarget.value)} value={message}/></div>
+            <button onClick={sendMessage}>send</button>
         </div>
     );
 };
